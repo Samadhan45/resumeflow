@@ -77,11 +77,13 @@ export type Action =
   | { type: 'UPDATE_EXPERIENCE'; payload: { index: number; key: string; value: string } }
   | { type: 'UPDATE_EXPERIENCE_BULLETS'; payload: { index: number; bullets: string[] } }
   | { type: 'REMOVE_EXPERIENCE'; payload: number }
-  | { type: 'MOVE_EXPERIENCE'; payload: { from: number; to: number } }
+  | { type: 'ADD_PROJECT' }
+  | { type: 'UPDATE_PROJECT'; payload: { index: number; key: string; value: string } }
+  | { type: 'UPDATE_PROJECT_BULLETS'; payload: { index: number; bullets: string[] } }
+  | { type: 'REMOVE_PROJECT'; payload: number }
   | { type: 'ADD_EDUCATION' }
   | { type: 'UPDATE_EDUCATION'; payload: { index: number; key: string; value: string } }
   | { type: 'REMOVE_EDUCATION'; payload: number }
-  | { type: 'MOVE_EDUCATION'; payload: { from: number; to: number } }
   | { type: 'UPDATE_NEW_SKILL'; payload: string }
   | { type: 'ADD_SKILL' }
   | { type: 'UPDATE_SKILL'; payload: { index: number; value: string } }

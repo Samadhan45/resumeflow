@@ -33,14 +33,24 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
         }
     case 'REMOVE_EXPERIENCE':
       return { ...state, experience: state.experience.filter((_, i) => i !== action.payload) };
-    case 'MOVE_EXPERIENCE': {
-      const { from, to } = action.payload;
-      if (to < 0 || to >= state.experience.length) return state;
-      const newExperience = [...state.experience];
-      const [item] = newExperience.splice(from, 1);
-      newExperience.splice(to, 0, item);
-      return { ...state, experience: newExperience };
-    }
+    case 'ADD_PROJECT':
+        return { ...state, projects: [...state.projects, { id: nanoid(), name: '', technologies: '', endDate: '', description: '', bulletPoints: [] }] };
+    case 'UPDATE_PROJECT':
+        return {
+            ...state,
+            projects: state.projects.map((proj, i) =>
+            i === action.payload.index ? { ...proj, [action.payload.key]: action.payload.value } : proj
+            ),
+        };
+    case 'UPDATE_PROJECT_BULLETS':
+        return {
+            ...state,
+            projects: state.projects.map((proj, i) =>
+                i === action.payload.index ? { ...proj, bulletPoints: action.payload.bullets } : proj
+            )
+        }
+    case 'REMOVE_PROJECT':
+        return { ...state, projects: state.projects.filter((_, i) => i !== action.payload) };
     case 'ADD_EDUCATION':
       return { ...state, education: [...state.education, { id: nanoid(), degree: '', institution: '', graduationDate: '' }] };
     case 'UPDATE_EDUCATION':
@@ -52,14 +62,6 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
       };
     case 'REMOVE_EDUCATION':
       return { ...state, education: state.education.filter((_, i) => i !== action.payload) };
-    case 'MOVE_EDUCATION': {
-      const { from, to } = action.payload;
-      if (to < 0 || to >= state.education.length) return state;
-      const newEducation = [...state.education];
-      const [item] = newEducation.splice(from, 1);
-      newEducation.splice(to, 0, item);
-      return { ...state, education: newEducation };
-    }
     case 'UPDATE_NEW_SKILL':
         return { ...state, newSkill: action.payload };
     case 'ADD_SKILL':
