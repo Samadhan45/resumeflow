@@ -2,6 +2,7 @@
 import { useResume } from '@/hooks/use-resume';
 import { Icons } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/components/ui/badge';
 
 export function ResumePreview() {
   const { state } = useResume();
@@ -100,6 +101,14 @@ export function ResumePreview() {
                   <li key={i}>{point}</li>
                 ))}
               </ul>
+              {proj.techStack && proj.techStack.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-1">
+                  <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
+                   {proj.techStack.map((tech, i) => (
+                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
+                   ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -121,6 +130,14 @@ export function ResumePreview() {
                   <li key={i}>{point}</li>
                 ))}
               </ul>
+               {exp.techStack && exp.techStack.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-1">
+                    <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
+                   {exp.techStack.map((tech, i) => (
+                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
+                   ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

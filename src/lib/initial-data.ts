@@ -25,6 +25,7 @@ export const initialData: Resume = {
         'Integrated Clerk for Google login (100+ users) and Gemini AI to auto-log expenses from scanned bills.',
         'Managed financial data with Neon PostgreSQL and deployed on Vercel for fast, secure global access.',
       ],
+      techStack: ['Next.js', 'Tailwind CSS', 'Clerk', 'Gemini AI', 'PostgreSQL'],
     },
     {
       id: '2',
@@ -36,6 +37,7 @@ export const initialData: Resume = {
         'Integrated Open AI-powered search and summary generator, boosting retrieval speed by 70%.',
         'Enabled PDF/JPEG exports, notes, and real-time updates, supporting mobile, tablet, and desktop users.',
       ],
+       techStack: ['React Hooks', 'JavaScript', 'CSS', 'Open AI', 'Firebase'],
     },
     {
         id: '3',
@@ -47,6 +49,7 @@ export const initialData: Resume = {
             'Integrated Gemini AI (Genkit) for generating smart skill descriptions with tone customisation.',
             'Showcased 4 projects, 6 certifications, and enabled real-time messaging via the Resend email service.'
         ],
+        techStack: ['TypeScript', 'Next.js', 'Resend', 'Gemini AI'],
     },
   ],
   experience: [
@@ -62,6 +65,7 @@ export const initialData: Resume = {
             'Authentication: Learned to implement user login and security using Django\'s built-in features.',
             'Learned end-to-end project deployment workflows, including environment setup, 2+ domain integrations.'
         ],
+        techStack: ['Django', 'Python', 'cPanel'],
     },
     {
         id: '2',
@@ -75,6 +79,7 @@ export const initialData: Resume = {
             'Designed and developed 10+ reusable components using HTML, CSS, JavaScript, and React.js.',
             'Enhanced UI consistency, contributing to 20% faster load times and 100% mobile responsiveness.'
         ],
+        techStack: ['React.js', 'HTML', 'CSS', 'JavaScript'],
     }
   ],
   education: [

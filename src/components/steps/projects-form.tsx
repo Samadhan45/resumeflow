@@ -31,6 +31,12 @@ export function ProjectsForm() {
         bullets[bulletIndex] = value;
         dispatch({ type: 'UPDATE_PROJECT_BULLETS', payload: { index: projIndex, bullets } });
     }
+    
+    const handleTechStackChange = (projIndex: number, value: string) => {
+        const techStack = value.split(',').map(s => s.trim());
+        dispatch({ type: 'UPDATE_PROJECT_TECH_STACK', payload: { index: projIndex, techStack } });
+    };
+
 
     return (
         <div className="space-y-8">
@@ -76,6 +82,10 @@ export function ProjectsForm() {
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />
                                         ))}
                                     </div>
+                                </div>
+                                 <div>
+                                    <Label htmlFor={`techStack-${index}`}>Tech Stack (comma-separated)</Label>
+                                    <Input id={`techStack-${index}`} name="techStack" value={proj.techStack.join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
                                 </div>
                             </div>
                         </AccordionContent>

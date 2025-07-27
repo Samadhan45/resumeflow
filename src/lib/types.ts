@@ -20,6 +20,7 @@ export interface Experience {
   endDate: string;
   responsibilities: string;
   bulletPoints: string[];
+  techStack: string[];
 }
 
 export interface Project {
@@ -29,6 +30,7 @@ export interface Project {
     link?: string;
     description: string;
     bulletPoints: string[];
+    techStack: string[];
 }
 
 export interface Education {
@@ -88,10 +90,12 @@ export type Action =
   | { type: 'ADD_EXPERIENCE' }
   | { type: 'UPDATE_EXPERIENCE'; payload: { index: number; key: string; value: string } }
   | { type: 'UPDATE_EXPERIENCE_BULLETS'; payload: { index: number; bullets: string[] } }
+  | { type: 'UPDATE_EXPERIENCE_TECH_STACK'; payload: { index: number; techStack: string[] } }
   | { type: 'REMOVE_EXPERIENCE'; payload: number }
   | { type: 'ADD_PROJECT' }
   | { type: 'UPDATE_PROJECT'; payload: { index: number; key: string; value: string } }
   | { type: 'UPDATE_PROJECT_BULLETS'; payload: { index: number; bullets: string[] } }
+  | { type: 'UPDATE_PROJECT_TECH_STACK'; payload: { index: number; techStack: string[] } }
   | { type: 'REMOVE_PROJECT'; payload: number }
   | { type: 'ADD_EDUCATION' }
   | { type: 'UPDATE_EDUCATION'; payload: { index: number; key: string; value: string } }

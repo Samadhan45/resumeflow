@@ -54,6 +54,11 @@ export function EmploymentHistoryForm() {
         bullets[bulletIndex] = value;
         dispatch({ type: 'UPDATE_EXPERIENCE_BULLETS', payload: { index: expIndex, bullets } });
     }
+    
+    const handleTechStackChange = (expIndex: number, value: string) => {
+        const techStack = value.split(',').map(s => s.trim());
+        dispatch({ type: 'UPDATE_EXPERIENCE_TECH_STACK', payload: { index: expIndex, techStack } });
+    };
 
     return (
         <div className="space-y-8">
@@ -114,6 +119,10 @@ export function EmploymentHistoryForm() {
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />
                                         ))}
                                     </div>
+                                </div>
+                                <div>
+                                    <Label htmlFor={`techStack-${index}`}>Tech Stack (comma-separated)</Label>
+                                    <Input id={`techStack-${index}`} name="techStack" value={exp.techStack.join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
                                 </div>
                             </div>
                         </AccordionContent>

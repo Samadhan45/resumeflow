@@ -16,7 +16,7 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
     case 'UPDATE_SUMMARY':
       return { ...state, summary: action.payload };
     case 'ADD_EXPERIENCE':
-      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', bulletPoints: [] }] };
+      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', bulletPoints: [], techStack: [] }] };
     case 'UPDATE_EXPERIENCE':
       return {
         ...state,
@@ -31,10 +31,17 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
                 i === action.payload.index ? { ...exp, bulletPoints: action.payload.bullets } : exp
             )
         }
+    case 'UPDATE_EXPERIENCE_TECH_STACK':
+        return {
+            ...state,
+            experience: state.experience.map((exp, i) =>
+                i === action.payload.index ? { ...exp, techStack: action.payload.techStack } : exp
+            )
+        }
     case 'REMOVE_EXPERIENCE':
       return { ...state, experience: state.experience.filter((_, i) => i !== action.payload) };
     case 'ADD_PROJECT':
-        return { ...state, projects: [...state.projects, { id: nanoid(), name: '', endDate: '', description: '', bulletPoints: [] }] };
+        return { ...state, projects: [...state.projects, { id: nanoid(), name: '', endDate: '', description: '', bulletPoints: [], techStack: [] }] };
     case 'UPDATE_PROJECT':
         return {
             ...state,
@@ -47,6 +54,13 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
             ...state,
             projects: state.projects.map((proj, i) =>
                 i === action.payload.index ? { ...proj, bulletPoints: action.payload.bullets } : proj
+            )
+        }
+    case 'UPDATE_PROJECT_TECH_STACK':
+        return {
+            ...state,
+            projects: state.projects.map((proj, i) =>
+                i === action.payload.index ? { ...proj, techStack: action.payload.techStack } : proj
             )
         }
     case 'REMOVE_PROJECT':
