@@ -113,11 +113,22 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     try {
       const storedState = localStorage.getItem('resumeState');
       if (storedState) {
-        const parsedState = JSON.parse(storedState);
-        // Ensure theme exists on stored state, otherwise merge with initial
-        if (!parsedState.theme) {
-          parsedState.theme = initialData.theme;
+        let parsedState = JSON.parse(storedState);
+        // Deep merge theme to ensure new properties are added
+        if (parsedState.theme) {
+            parsedState.theme = {
+                ...initialData.theme,
+                ...parsedState.theme,
+                heading: { ...initialData.theme.heading, ...parsedState.theme.heading },
+                subheading: { ...initialData.theme.subheading, ...parsedState.theme.subheading },
+                sectionHeading: { ...initialData.theme.sectionHeading, ...parsedState.theme.sectionHeading },
+                body: { ...initialData.theme.body, ...parsedState.theme.body },
+                link: { ...initialData.theme.link, ...parsedState.theme.link },
+            };
+        } else {
+            parsedState.theme = initialData.theme;
         }
+
         dispatch({ type: 'SET_STATE', payload: parsedState });
       }
     } catch (error) {

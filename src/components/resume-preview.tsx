@@ -8,17 +8,16 @@ export function ResumePreview() {
   const { personalInfo, summary, projects, experience, education, skills, certifications, achievements, theme } = state;
 
   const themeStyle = {
-    '--primary-print': theme.primaryColor,
+    '--primary-print': theme.sectionHeading.color,
+    '--link-color': theme.link.color,
     'fontFamily': theme.fontFamily,
-    'fontSize': `${theme.fontSize}px`,
-    'lineHeight': theme.lineHeight,
   } as React.CSSProperties;
 
   const renderLink = (url:string) => {
     if (!url) return null;
     const fullUrl = url.startsWith('http') ? url : `https://${url}`;
     const displayUrl = url.replace(/^https?:\/\//, '');
-    return <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{displayUrl}</a>
+    return <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="hover:underline" style={{color: 'var(--link-color)'}}>{displayUrl}</a>
   }
 
   return (
@@ -29,36 +28,36 @@ export function ResumePreview() {
       >
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold font-headline tracking-tight" style={{ color: theme.primaryColor }}>
+          <h1 className="text-2xl font-bold font-headline tracking-tight" style={{ color: theme.heading.color, fontSize: `${theme.heading.fontSize}px` }}>
             {personalInfo.name} {personalInfo.lastName}
           </h1>
-          <h2 className="text-md font-semibold text-gray-600 mt-1">{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
-          <div className="flex justify-center items-center gap-x-2 text-xs text-gray-600 mt-1 flex-wrap">
+          <h2 className="text-md font-semibold mt-1" style={{ color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px` }}>{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
+          <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             <span>{personalInfo.location}</span>
             <span className="text-gray-400">|</span>
             <span>{personalInfo.phone}</span>
             <span className="text-gray-400">|</span>
-            <a href={`mailto:${personalInfo.email}`} className="text-blue-600 hover:underline">{personalInfo.email}</a>
+            <a href={`mailto:${personalInfo.email}`} className="hover:underline" style={{color: 'var(--link-color)'}}>{personalInfo.email}</a>
           </div>
-          <div className="flex justify-center items-center gap-x-2 text-xs text-gray-600 mt-1 flex-wrap">
+          <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             {personalInfo.github && <span>Github: {renderLink(personalInfo.github)}</span>}
-            <span className="text-gray-400">|</span>
+            {personalInfo.github && <span className="text-gray-400">|</span>}
             {personalInfo.linkedin && <span>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
-            <span className="text-gray-400">|</span>
+            {personalInfo.linkedin && <span className="text-gray-400">|</span>}
             {personalInfo.website && <span>Portfolio: {renderLink(personalInfo.website)}</span>}
           </div>
         </div>
 
         {/* Summary */}
         <div className="space-y-1">
-          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>PROFESSIONAL SUMMARY</h2>
-          <p className="leading-relaxed">{summary}</p>
+          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>PROFESSIONAL SUMMARY</h2>
+          <p className="leading-relaxed" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>{summary}</p>
         </div>
 
         {/* Skills */}
         <div className="space-y-1">
-          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>SKILLS</h2>
-          <ul className="list-disc list-inside space-y-1">
+          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>SKILLS</h2>
+          <ul className="list-disc list-inside space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 {skills.map((skill) => (
                     <li key={skill.id}>{skill.name}</li>
                 ))}
@@ -67,17 +66,17 @@ export function ResumePreview() {
         
         {/* Education */}
         <div className="space-y-1">
-        <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>EDUCATION</h2>
+        <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>EDUCATION</h2>
         {education.map((edu) => (
             <div key={edu.id} className="space-y-0.5">
                 <div className="flex justify-between items-start">
-                    <div className='flex-grow'>
-                        <h3 className="font-bold">{edu.institution}</h3>
-                        <ul className='list-disc list-inside'>
+                    <div className='flex-grow' style={{lineHeight: theme.lineHeight}}>
+                        <h3 className="font-bold" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>{edu.institution}</h3>
+                        <ul className='list-disc list-inside' style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>
                             <li>{edu.degree}</li>
                         </ul>
                     </div>
-                    <p className="text-gray-500 text-right flex-shrink-0 ml-4">{edu.graduationDate}</p>
+                    <p className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{edu.graduationDate}</p>
                 </div>
             </div>
         ))}
@@ -85,17 +84,17 @@ export function ResumePreview() {
 
         {/* Projects */}
         <div className="space-y-2">
-          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>PROJECTS</h2>
+          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>PROJECTS</h2>
           {projects.map((proj) => (
             <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                <h3 className="font-bold text-sm flex-shrink-0">
+                <h3 className="font-bold text-sm flex-shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
                     {proj.name} ({proj.technologies}) –{' '}
-                    <a href={proj.link} target="_blank" rel="noopener noreferrer" className='text-blue-600 hover:underline'>Link</a>
+                    {proj.link && renderLink(proj.link)}
                 </h3>
-                <div className="text-gray-500 text-right flex-shrink-0 ml-4">{proj.endDate}</div>
+                <div className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
               </div>
-              <ul className="list-disc list-inside pl-2 space-y-1">
+              <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{proj.description}</li>
                 {proj.bulletPoints.map((point, i) => (
                   <li key={i}>{point}</li>
@@ -107,14 +106,14 @@ export function ResumePreview() {
 
         {/* Experience */}
         <div className="space-y-2">
-          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>WORK EXPERIENCE</h2>
+          <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>WORK EXPERIENCE</h2>
           {experience.map((exp) => (
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                 <h3 className="font-bold text-sm flex-shrink-0">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
-                <div className="text-gray-500 text-right flex-shrink-0 ml-4">{exp.startDate} - {exp.endDate}</div>
+                 <h3 className="font-bold text-sm flex-shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" style={{color: 'var(--link-color)'}} className="hover:underline">Link</a></h3>
+                <div className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
               </div>
-              <ul className="list-disc list-inside pl-2 space-y-1">
+              <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{exp.responsibilities}</li>
                 {(exp.bulletPoints.length > 0 ? exp.bulletPoints : []).map((point, i) => (
                   <li key={i}>{point}</li>
@@ -126,16 +125,16 @@ export function ResumePreview() {
 
         {/* Certifications and Courses */}
         <div className="space-y-1">
-            <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>CERTIFICATIONS AND COURSES</h2>
-            <ul className="list-disc list-inside space-y-1 grid grid-cols-2">
+            <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>CERTIFICATIONS AND COURSES</h2>
+            <ul className="list-disc list-inside space-y-1 grid grid-cols-2" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 {certifications.map(cert => <li key={cert.id}>{cert.name}</li>)}
             </ul>
         </div>
 
         {/* Achievements */}
         <div className="space-y-1">
-            <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)'}}>ACHIEVEMENTS</h2>
-            <ul className="list-disc list-inside space-y-1">
+            <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>ACHIEVEMENTS</h2>
+            <ul className="list-disc list-inside space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 {achievements.map(ach => <li key={ach.id}>{ach.name}</li>)}
             </ul>
         </div>

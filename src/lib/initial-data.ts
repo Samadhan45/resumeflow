@@ -112,8 +112,26 @@ export const initialData: Resume = {
   newSkill: '',
   theme: {
     fontFamily: 'Inter',
-    fontSize: 12,
     lineHeight: 1.5,
-    primaryColor: '#000000',
+    heading: {
+        fontSize: 32,
+        color: '#000000',
+    },
+    subheading: {
+        fontSize: 16,
+        color: '#4a5568',
+    },
+    sectionHeading: {
+        fontSize: 14,
+        color: '#2d3748',
+    },
+    body: {
+        fontSize: 12,
+        color: '#2d3748',
+    },
+    link: {
+        fontSize: 12,
+        color: '#2b6cb0',
+    }
   }
 };

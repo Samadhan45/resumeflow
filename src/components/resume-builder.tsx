@@ -9,7 +9,7 @@ import { useStep } from '@/hooks/use-step';
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 
-const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "DESIGN", "FINISH"];
+const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
 
 function Stepper() {
   const { step, setStep } = useStep();
@@ -47,7 +47,7 @@ function Stepper() {
 
 
 export function ResumeBuilder() {
-    const { step, nextStep, prevStep, setStep } = useStep();
+    const { step, nextStep, prevStep } = useStep();
     const isLastStep = step === steps.length;
     const isFirstStep = step === 1;
 
@@ -59,8 +59,9 @@ export function ResumeBuilder() {
         nextStep();
       }
     }
-
+    
     const nextButtonText = isLastStep ? "Finish" : `Next to ${steps[step]}`;
+
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">

@@ -54,11 +54,19 @@ export interface Achievement {
     name: string;
 }
 
+interface FontStyle {
+    fontSize: number;
+    color: string;
+}
+
 export interface Theme {
     fontFamily: string;
-    fontSize: number;
     lineHeight: number;
-    primaryColor: string;
+    heading: FontStyle;
+    subheading: FontStyle;
+    sectionHeading: FontStyle;
+    body: FontStyle;
+    link: FontStyle;
 }
 
 export interface Resume {

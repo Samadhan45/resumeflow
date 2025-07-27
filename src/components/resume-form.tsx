@@ -18,15 +18,15 @@ export function ResumeForm() {
 
   return (
     <div>
-      {step === 1 && <PersonalDetailsForm />}
-      {step === 2 && <EmploymentHistoryForm />}
-      {step === 3 && <ProjectsForm />}
-      {step === 4 && <EducationForm />}
-      {step === 5 && <SkillsForm />}
-      {step === 6 && <CertificationsForm />}
-      {step === 7 && <AchievementsForm />}
-      {step === 8 && <SummaryForm />}
-      {step === 9 && <DesignForm />}
+      {step === 1 && <DesignForm />}
+      {step === 2 && <PersonalDetailsForm />}
+      {step === 3 && <EmploymentHistoryForm />}
+      {step === 4 && <ProjectsForm />}
+      {step === 5 && <EducationForm />}
+      {step === 6 && <SkillsForm />}
+      {step === 7 && <CertificationsForm />}
+      {step === 8 && <AchievementsForm />}
+      {step === 9 && <SummaryForm />}
       {step === 10 && <FinishForm />}
     </div>
   );
