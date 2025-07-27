@@ -1,3 +1,10 @@
+import { ResumeBuilder } from '@/components/resume-builder';
+import { ResumeProvider } from '@/hooks/use-resume.tsx';
+
 export default function Home() {
-  return <></>;
+  return (
+    <ResumeProvider>
+      <ResumeBuilder />
+    </ResumeProvider>
+  );
 }
