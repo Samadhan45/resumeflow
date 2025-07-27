@@ -20,6 +20,11 @@ import {
   Phone,
   MapPin,
   Link as LinkIcon,
+  Check,
+  ArrowLeft,
+  ArrowRight,
+  Lock,
+  ChevronDown,
 } from 'lucide-react';
 
 export const Icons = {
@@ -44,4 +49,9 @@ export const Icons = {
   phone: Phone,
   mapPin: MapPin,
   link: LinkIcon,
+  check: Check,
+  arrowLeft: ArrowLeft,
+  arrowRight: ArrowRight,
+  lock: Lock,
+  chevronDown: ChevronDown
 };

@@ -1,10 +1,13 @@
 import { ResumeBuilder } from '@/components/resume-builder';
-import { ResumeProvider } from '@/hooks/use-resume.tsx';
+import { ResumeProvider } from '@/hooks/use-resume';
+import { StepProvider } from '@/hooks/use-step';
 
 export default function Home() {
   return (
     <ResumeProvider>
-      <ResumeBuilder />
+      <StepProvider>
+        <ResumeBuilder />
+      </StepProvider>
     </ResumeProvider>
   );
 }

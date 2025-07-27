@@ -1,9 +1,13 @@
 export interface PersonalInfo {
   name: string;
+  lastName?: string;
+  jobTitle?: string;
   email: string;
   phone: string;
   location: string;
   website: string;
+  city?: string;
+  country?: string;
 }
 
 export interface Experience {

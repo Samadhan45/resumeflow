@@ -3,81 +3,55 @@
 import React from 'react';
 import { ResumeForm } from '@/components/resume-form';
 import { ResumePreview } from '@/components/resume-preview';
-import { useResume } from '@/hooks/use-resume';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
-import { ThemeToggle } from '@/components/theme-toggle';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { Progress } from '@/components/ui/progress';
 
 export function ResumeBuilder() {
-  const { state } = useResume();
-
-  const handleExportJson = () => {
-    const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(
-      JSON.stringify(state, null, 2)
-    )}`;
-    const link = document.createElement('a');
-    link.href = jsonString;
-    link.download = 'resume.json';
-    link.click();
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-          <div className="flex gap-6 md:gap-10">
-            <a href="/" className="flex items-center space-x-2">
-              <Icons.pen className="h-6 w-6 text-primary" />
-              <span className="inline-block font-bold font-headline text-xl">
-                ResumeFlow
-              </span>
-            </a>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <header className="sticky top-0 z-40 w-full border-b bg-white">
+        <div className="container flex h-16 items-center justify-between">
+          <div className="flex items-center space-x-2 text-red-500 font-bold">
+            <span className="bg-red-100 text-red-600 text-xs font-bold px-2 py-1 rounded-md">10%</span>
+            <span>Your resume score</span>
           </div>
-          <div className="flex flex-1 items-center justify-end space-x-4">
-            <nav className="flex items-center space-x-2">
-              <ThemeToggle />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button>
-                    <Icons.download className="mr-2" />
-                    Export
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem onClick={handlePrint}>
-                    <Icons.printer className="mr-2 h-4 w-4" />
-                    <span>PDF</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleExportJson}>
-                    <Icons.json className="mr-2 h-4 w-4" />
-                    <span>JSON</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </nav>
+          <div className="flex items-center space-x-4">
+             <span className="text-sm font-semibold text-green-600">+10% Add job title</span>
+            <Button variant="outline">
+              <Icons.palette className="mr-2" />
+              Change template
+            </Button>
           </div>
         </div>
       </header>
-      <main className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4 container py-4">
-        <div className="resume-form-container md:col-span-1 lg:col-span-2 xl:col-span-1">
+      <main className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 container py-8">
+        <div className="resume-form-container">
           <ResumeForm />
         </div>
-        <div className="resume-preview-container md:col-span-1 lg:col-span-1">
-          <div className="sticky top-20">
+        <div className="resume-preview-container">
+          <div className="sticky top-24">
             <ResumePreview />
           </div>
         </div>
       </main>
+      <footer className="sticky bottom-0 z-40 w-full border-t bg-white py-4">
+        <div className="container flex justify-between items-center">
+            <p className="text-xs text-gray-500 max-w-md">
+                By signing up by email you agree with our <a href="#" className="underline">Terms of use</a> and <a href="#" className="underline">Privacy Policy</a>, and topresume.com's <a href="#" className="underline">Terms & Conditions and Privacy Policy</a>.
+            </p>
+            <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-500 flex items-center gap-2"><Icons.check className="text-green-500"/>Saved</span>
+                <div className="flex items-center gap-2 text-sm">
+                    <Button variant="ghost" size="icon"><Icons.arrowLeft/></Button>
+                    <span>1 / 1</span>
+                    <Button variant="ghost" size="icon"><Icons.arrowRight/></Button>
+                </div>
+                <Button>Next: Employment History</Button>
+            </div>
+        </div>
+
+      </footer>
     </div>
   );
 }
