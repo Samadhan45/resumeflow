@@ -12,7 +12,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
 
 function Stepper() {
-  const { step } = useStep();
+  const { step, setStep } = useStep();
   return (
     <div className="flex justify-center items-center py-4 px-8">
       <div className="flex items-center w-full max-w-4xl mx-auto">
@@ -22,7 +22,7 @@ function Stepper() {
           const isCompleted = step > stepNumber;
           return (
             <React.Fragment key={name}>
-              <div className="flex flex-col items-center text-center">
+              <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer">
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${
                     isActive || isCompleted ? 'border-blue-500' : 'border-gray-300'
@@ -33,7 +33,7 @@ function Stepper() {
                 <p className={`mt-2 text-xs font-semibold w-24 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}
                 </p>
-              </div>
+              </button>
               {index < steps.length - 1 && (
                 <div className={`flex-1 h-0.5 mx-2 ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
               )}

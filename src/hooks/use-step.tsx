@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, type ReactNode } from 'reac
 
 type StepContextType = {
   step: number;
+  setStep: (step: number) => void;
   nextStep: () => void;
   prevStep: () => void;
 };
@@ -16,7 +17,7 @@ export const StepProvider = ({ children }: { children: ReactNode }) => {
   const prevStep = () => setStep(prev => (prev > 1 ? prev - 1 : 1));
 
   return (
-    <StepContext.Provider value={{ step, nextStep, prevStep }}>
+    <StepContext.Provider value={{ step, setStep, nextStep, prevStep }}>
       {children}
     </StepContext.Provider>
   );
