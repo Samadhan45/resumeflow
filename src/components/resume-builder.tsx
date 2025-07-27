@@ -63,6 +63,13 @@ export function ResumeBuilder() {
     
     const nextButtonText = isLastStep ? "Finish" : `Next to ${steps[step]}`;
 
+    const handleWheel = (event: React.WheelEvent) => {
+        if (event.ctrlKey) {
+            event.preventDefault();
+            const zoomAmount = event.deltaY > 0 ? -0.1 : 0.1;
+            setZoom(z => Math.max(0.2, z + zoomAmount));
+        }
+    }
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
@@ -92,7 +99,7 @@ export function ResumeBuilder() {
                 </Panel>
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
                 <Panel defaultSize={60} minSize={40}>
-                     <div className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-center h-full overflow-auto">
+                     <div onWheel={handleWheel} className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-center h-full overflow-auto">
                         <div className="absolute top-4 right-4 flex items-center gap-2">
                             <Button variant="outline" size="icon" onClick={() => setZoom(z => z + 0.1)}>
                                 <Icons.zoomIn className="w-4 h-4" />
