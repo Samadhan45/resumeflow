@@ -17,9 +17,11 @@ import {
 export function EmploymentHistoryForm() {
     const { state, dispatch } = useResume();
     const [generating, setGenerating] = useState<number | null>(null);
+    const [openAccordion, setOpenAccordion] = useState('item-0');
 
     const handleAddExperience = () => {
         dispatch({ type: 'ADD_EXPERIENCE' });
+        setOpenAccordion(`item-${state.experience.length}`);
     };
 
     const handleRemoveExperience = (index: number) => {
@@ -66,7 +68,7 @@ export function EmploymentHistoryForm() {
                 <h1 className="text-3xl font-bold">Your work <span className="text-blue-600">experience</span></h1>
                 <p className="text-gray-500 mt-2">What has been your work experience so far?</p>
              </div>
-            <Accordion type="single" collapsible className="w-full" defaultValue='item-0'>
+            <Accordion type="single" collapsible className="w-full" value={openAccordion} onValueChange={setOpenAccordion}>
                 {state.experience.map((exp, index) => (
                     <AccordionItem value={`item-${index}`} key={exp.id}>
                          <div className="flex justify-between w-full items-center pr-2">

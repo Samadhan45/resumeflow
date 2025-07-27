@@ -15,7 +15,7 @@ const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKIL
 function Stepper() {
   const { step, setStep } = useStep();
   return (
-    <div className="flex justify-center items-center py-4 px-8">
+    <div className="flex justify-center items-center py-4 px-8 overflow-x-auto">
       <div className="flex items-center w-full max-w-4xl mx-auto">
         {steps.map((name, index) => {
           const stepNumber = index + 1;
@@ -67,11 +67,11 @@ export function ResumeBuilder() {
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
        <header className="sticky top-0 z-10 w-full border-b bg-white flex items-center justify-between px-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <Logo />
             <h1 className="text-xl font-bold font-headline">ResumeFlow</h1>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <Stepper />
           </div>
         </header>
@@ -98,7 +98,7 @@ export function ResumeBuilder() {
                 </Panel>
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
                 <Panel defaultSize={60} minSize={40}>
-                     <div className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-center h-full overflow-auto">
+                     <div className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-start h-full overflow-auto">
                         <div className="absolute top-4 right-4 flex items-center gap-2">
                             <Button variant="outline" size="icon" onClick={() => setZoom(z => z + 0.1)}>
                                 <Icons.zoomIn className="w-4 h-4" />
@@ -107,7 +107,7 @@ export function ResumeBuilder() {
                                 <Icons.zoomOut className="w-4 h-4" />
                             </Button>
                         </div>
-                        <div className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }}>
+                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
                             <ResumePreview />
                         </div>
                     </div>
