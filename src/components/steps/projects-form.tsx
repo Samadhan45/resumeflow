@@ -27,7 +27,7 @@ export function ProjectsForm() {
     };
 
      const handleBulletPointChange = (projIndex: number, bulletIndex: number, value: string) => {
-        const bullets = [...state.projects[projIndex].bulletPoints];
+        const bullets = [...(state.projects[projIndex].bulletPoints || [])];
         bullets[bulletIndex] = value;
         dispatch({ type: 'UPDATE_PROJECT_BULLETS', payload: { index: projIndex, bullets } });
     }

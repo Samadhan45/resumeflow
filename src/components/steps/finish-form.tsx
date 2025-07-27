@@ -14,9 +14,10 @@ export function FinishForm() {
         const input = document.getElementById('resume-preview');
         if (input) {
             html2canvas(input, {
-                scale: 2, // Higher scale for better quality
+                scale: 3, // Higher scale for better quality
                 useCORS: true,
                 logging: false,
+                backgroundColor: '#ffffff'
             }).then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF({

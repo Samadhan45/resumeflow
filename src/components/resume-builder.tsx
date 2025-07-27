@@ -14,13 +14,15 @@ const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKIL
 
 function Stepper() {
   const { step, setStep } = useStep();
+  const totalSteps = steps.length;
+
   return (
     <div className="flex justify-center items-center py-4 px-8 overflow-x-auto">
       <div className="flex items-center w-full max-w-4xl mx-auto">
         {steps.map((name, index) => {
           const stepNumber = index + 1;
           const isActive = step === stepNumber;
-          const isCompleted = step > stepNumber;
+          const isCompleted = step > stepNumber || step === totalSteps + 1; // Mark all as completed on finish
           return (
             <React.Fragment key={name}>
               <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer">
@@ -29,7 +31,8 @@ function Stepper() {
                     isActive || isCompleted ? 'border-blue-500' : 'border-gray-300'
                   } ${isCompleted ? 'bg-blue-500' : 'bg-white'}`}
                 >
-                  {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
+                  {(isCompleted && stepNumber !== totalSteps) && <Icons.check className="w-4 h-4 text-white" />}
+                   {isCompleted && stepNumber === totalSteps && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
                 <p className={`mt-2 text-xs font-semibold w-24 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}
@@ -55,8 +58,7 @@ export function ResumeBuilder() {
 
     const handleNext = () => {
       if (isLastStep) {
-        // Handle finish logic
-        console.log("Finished");
+        nextStep(); // Move to the "finish" view which is step 11
       } else {
         nextStep();
       }
@@ -84,6 +86,7 @@ export function ResumeBuilder() {
                                 <ResumeForm />
                             </div>
                         </div>
+                       {step <= steps.length && (
                         <div className="p-4 md:p-8 border-t bg-white">
                              <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                                 <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
@@ -94,6 +97,7 @@ export function ResumeBuilder() {
                                 </Button>
                             </div>
                         </div>
+                       )}
                     </main>
                 </Panel>
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />

@@ -97,14 +97,14 @@ export function ResumePreview() {
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{proj.description}</li>
-                {proj.bulletPoints.map((point, i) => (
+                {(proj.bulletPoints || []).map((point, i) => (
                   <li key={i}>{point}</li>
                 ))}
               </ul>
-              {proj.techStack && proj.techStack.length > 0 && (
+              {(proj.techStack || []).length > 0 && (
                 <div className="flex flex-wrap gap-1 pt-1">
                   <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
-                   {proj.techStack.map((tech, i) => (
+                   {(proj.techStack || []).map((tech, i) => (
                      <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
                    ))}
                 </div>
@@ -126,14 +126,14 @@ export function ResumePreview() {
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{exp.responsibilities}</li>
-                {(exp.bulletPoints.length > 0 ? exp.bulletPoints : []).map((point, i) => (
+                {(exp.bulletPoints || []).map((point, i) => (
                   <li key={i}>{point}</li>
                 ))}
               </ul>
-               {exp.techStack && exp.techStack.length > 0 && (
+               {(exp.techStack || []).length > 0 && (
                 <div className="flex flex-wrap gap-1 pt-1">
                     <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
-                   {exp.techStack.map((tech, i) => (
+                   {(exp.techStack || []).map((tech, i) => (
                      <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
                    ))}
                 </div>

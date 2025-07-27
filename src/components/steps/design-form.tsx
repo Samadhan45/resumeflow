@@ -133,7 +133,7 @@ export function DesignForm() {
     
     const handleAcceptChanges = () => {
         if (generatedResume) {
-            dispatch({ type: 'SET_STATE', payload: { ...state, ...generatedResume } });
+            dispatch({ type: 'SET_STATE', payload: { ...generatedResume, theme: state.theme, newSkill: state.newSkill } });
             toast({
                 title: 'Resume Updated!',
                 description: 'Your resume has been updated with the AI-generated content.',
