@@ -59,7 +59,7 @@ export function ResumePreview() {
         <div className="space-y-1">
           <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>SKILLS</h2>
           <ul className="list-disc list-inside space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
-                {skills.map((skill) => (
+                {(skills || []).map((skill) => (
                     <li key={skill.id}>{skill.name}</li>
                 ))}
             </ul>
@@ -68,7 +68,7 @@ export function ResumePreview() {
         {/* Education */}
         <div className="space-y-1">
         <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>EDUCATION</h2>
-        {education.map((edu) => (
+        {(education || []).map((edu) => (
             <div key={edu.id} className="space-y-0.5">
                 <div className="flex justify-between items-start">
                     <div className='flex-grow' style={{lineHeight: theme.lineHeight}}>
@@ -86,7 +86,7 @@ export function ResumePreview() {
         {/* Projects */}
         <div className="space-y-2">
           <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>PROJECTS</h2>
-          {projects.map((proj) => (
+          {(projects || []).map((proj) => (
             <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2 flex-nowrap">
                 <h3 className="font-bold text-sm flex-1 shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
@@ -116,7 +116,7 @@ export function ResumePreview() {
         {/* Experience */}
         <div className="space-y-2">
           <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>WORK EXPERIENCE</h2>
-          {experience.map((exp) => (
+          {(experience || []).map((exp) => (
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2 flex-nowrap">
                  <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
@@ -146,7 +146,7 @@ export function ResumePreview() {
         <div className="space-y-1">
             <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>CERTIFICATIONS AND COURSES</h2>
             <ul className="list-disc list-inside space-y-1 grid grid-cols-2" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
-                {certifications.map(cert => <li key={cert.id}>{cert.name}</li>)}
+                {(certifications || []).map(cert => <li key={cert.id}>{cert.name}</li>)}
             </ul>
         </div>
 
@@ -154,7 +154,7 @@ export function ResumePreview() {
         <div className="space-y-1">
             <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>ACHIEVEMENTS</h2>
             <ul className="list-disc list-inside space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
-                {achievements.map(ach => <li key={ach.id}>{ach.name}</li>)}
+                {(achievements || []).map(ach => <li key={ach.id}>{ach.name}</li>)}
             </ul>
         </div>
       </div>

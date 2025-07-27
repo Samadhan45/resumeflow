@@ -22,7 +22,7 @@ function Stepper() {
         {steps.map((name, index) => {
           const stepNumber = index + 1;
           const isActive = step === stepNumber;
-          const isCompleted = step > stepNumber || step === totalSteps + 1; // Mark all as completed on finish
+          const isCompleted = step > stepNumber || step > totalSteps; // Mark all as completed on finish
           return (
             <React.Fragment key={name}>
               <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer">
@@ -31,8 +31,7 @@ function Stepper() {
                     isActive || isCompleted ? 'border-blue-500' : 'border-gray-300'
                   } ${isCompleted ? 'bg-blue-500' : 'bg-white'}`}
                 >
-                  {(isCompleted && stepNumber !== totalSteps) && <Icons.check className="w-4 h-4 text-white" />}
-                   {isCompleted && stepNumber === totalSteps && <Icons.check className="w-4 h-4 text-white" />}
+                  {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
                 <p className={`mt-2 text-xs font-semibold w-24 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}

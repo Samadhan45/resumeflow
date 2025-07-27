@@ -14,37 +14,23 @@ export function FinishForm() {
         const input = document.getElementById('resume-preview');
         if (input) {
             html2canvas(input, {
-                scale: 3,
+                scale: 3, // Higher scale for better quality
                 useCORS: true,
                 logging: false,
                 backgroundColor: '#ffffff'
             }).then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
+                // Standard letter size in inches
+                const pdfWidth = 8.5;
+                const pdfHeight = 11;
+                
                 const pdf = new jsPDF({
                     orientation: 'portrait',
                     unit: 'in',
-                    format: 'letter'
+                    format: [pdfWidth, pdfHeight]
                 });
                 
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = pdf.internal.pageSize.getHeight();
-                
-                const canvasWidth = canvas.width;
-                const canvasHeight = canvas.height;
-                const canvasRatio = canvasHeight / canvasWidth;
-                
-                let finalPdfWidth = pdfWidth;
-                let finalPdfHeight = pdfWidth * canvasRatio;
-
-                if (finalPdfHeight > pdfHeight) {
-                    finalPdfHeight = pdfHeight;
-                    finalPdfWidth = pdfHeight / canvasRatio;
-                }
-
-                const x = (pdfWidth - finalPdfWidth) / 2;
-                const y = 0; // Start from top
-
-                pdf.addImage(imgData, 'PNG', x, y, finalPdfWidth, finalPdfHeight);
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save("resume.pdf");
             });
         }
