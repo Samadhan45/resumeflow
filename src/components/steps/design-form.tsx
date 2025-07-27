@@ -111,11 +111,15 @@ export function DesignForm() {
                 jobDescription,
                 currentResume: state,
             });
-            dispatch({ type: 'SET_STATE', payload: generatedResume as any });
-            toast({
-                title: 'Resume Generated!',
-                description: 'Your new resume has been generated based on the job description.',
-            });
+            if (generatedResume) {
+              dispatch({ type: 'SET_STATE', payload: { ...state, ...generatedResume } });
+              toast({
+                  title: 'Resume Generated!',
+                  description: 'Your new resume has been generated based on the job description.',
+              });
+            } else {
+              throw new Error("AI did not return a resume.");
+            }
         } catch (error) {
             console.error('Failed to generate resume:', error);
              toast({

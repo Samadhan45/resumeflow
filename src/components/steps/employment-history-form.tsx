@@ -69,7 +69,7 @@ export function EmploymentHistoryForm() {
             <Accordion type="single" collapsible className="w-full" defaultValue='item-0'>
                 {state.experience.map((exp, index) => (
                     <AccordionItem value={`item-${index}`} key={exp.id}>
-                        <div className="flex justify-between w-full items-center pr-2">
+                         <div className="flex justify-between w-full items-center pr-2">
                             <AccordionTrigger className="flex-1">
                                 <span>{exp.jobTitle || `Experience ${index + 1}`}</span>
                             </AccordionTrigger>
@@ -115,7 +115,7 @@ export function EmploymentHistoryForm() {
                                         {generating === index ? 'Generating...' : <><Icons.sparkles className="mr-2" />Autofill with AI</>}
                                     </Button>
                                     <div className="mt-2 space-y-2">
-                                        {exp.bulletPoints.map((point, i) => (
+                                        {(exp.bulletPoints || []).map((point, i) => (
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />
                                         ))}
                                     </div>

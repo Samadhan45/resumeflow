@@ -30,12 +30,12 @@ const prompt = ai.definePrompt({
   name: 'generateBulletPointsPrompt',
   input: {schema: GenerateBulletPointsInputSchema},
   output: {schema: GenerateBulletPointsOutputSchema},
-  prompt: `You are an expert resume writer. Generate 3-5 bullet points based on the job title and responsibilities provided.
+  prompt: `You are an expert resume writer. Generate 3-5 concise bullet points based on the job title and responsibilities provided.
 
 Job Title: {{{jobTitle}}}
 Responsibilities: {{{responsibilities}}}
 
-Bullet Points:`,
+Return the bullet points in the 'bulletPoints' array.`,
 });
 
 const generateBulletPointsFlow = ai.defineFlow(

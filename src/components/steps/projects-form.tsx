@@ -78,7 +78,7 @@ export function ProjectsForm() {
                                 <div>
                                     <Label>Bullet Points</Label>
                                      <div className="mt-2 space-y-2">
-                                        {proj.bulletPoints.map((point, i) => (
+                                        {(proj.bulletPoints || []).map((point, i) => (
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />
                                         ))}
                                     </div>
