@@ -70,7 +70,7 @@ export function ResumeBuilder() {
         </header>
         <div className="flex-1 overflow-hidden">
             <PanelGroup direction="horizontal" className="h-full">
-                <Panel defaultSize={50} minSize={40}>
+                <Panel defaultSize={50} minSize={30}>
                     <main className="flex flex-col h-full">
                         <div className="flex-1 overflow-y-auto p-4 md:p-8">
                             <div className="w-full max-w-lg mx-auto">
@@ -90,8 +90,8 @@ export function ResumeBuilder() {
                     </main>
                 </Panel>
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
-                <Panel defaultSize={50} minSize={30}>
-                     <div className="resume-preview-container bg-gray-100 p-4 md:p-8 flex items-center justify-center h-full overflow-auto">
+                <Panel defaultSize={50} minSize={40}>
+                     <div className="resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center h-full overflow-auto">
                         <div className="w-[8.5in] h-[11in] bg-white shadow-lg scale-[0.6] origin-top">
                             <ResumePreview />
                         </div>
