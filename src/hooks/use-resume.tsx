@@ -91,6 +91,7 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
       console.error("Failed to parse resume state from localStorage", error);
+      dispatch({ type: 'SET_STATE', payload: initialData });
     }
   }, []);
 

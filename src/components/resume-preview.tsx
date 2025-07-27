@@ -5,60 +5,94 @@ import { Separator } from '@/components/ui/separator';
 
 export function ResumePreview() {
   const { state } = useResume();
-  const { personalInfo, summary, experience, education, skills } = state;
+  const { personalInfo, summary, projects, experience, education, skills, certifications, achievements } = state;
 
   const themeStyle = {
     '--primary-print': 'hsl(var(--primary))',
   } as React.CSSProperties;
 
+  const renderLink = (url:string) => {
+    if (!url) return null;
+    const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+    const displayUrl = url.replace(/^https?:\/\//, '');
+    return <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{displayUrl}</a>
+  }
+
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden aspect-[8.5/11] max-w-4xl mx-auto">
       <div
-        className="p-8 md:p-12 space-y-8 bg-white text-gray-800 h-full overflow-auto"
+        className="p-8 md:p-12 space-y-4 bg-white text-gray-800 h-full overflow-auto text-xs"
         style={themeStyle}
       >
         {/* Header */}
-        <div className="text-center border-b-2 pb-4" style={{ borderColor: 'var(--primary-print)' }}>
-          <h1 className="text-4xl font-bold font-headline text-gray-800 tracking-tight">
-            {personalInfo.name || 'Your Name'} {personalInfo.lastName}
+        <div className="text-center">
+          <h1 className="text-2xl font-bold font-headline text-gray-800 tracking-tight">
+            {personalInfo.name}
           </h1>
-          <h2 className="text-xl font-semibold text-gray-600 mt-2">{personalInfo.jobTitle}</h2>
-          <div className="flex justify-center items-center gap-x-4 gap-y-2 text-sm text-gray-500 mt-2 flex-wrap">
-            {personalInfo.email && <div className="flex items-center gap-1.5"><Icons.mail size={14} /><span>{personalInfo.email}</span></div>}
-            {personalInfo.phone && <div className="flex items-center gap-1.5"><Icons.phone size={14} /><span>{personalInfo.phone}</span></div>}
-            {personalInfo.location && <div className="flex items-center gap-1.5"><Icons.mapPin size={14} /><span>{`${personalInfo.location}, ${personalInfo.city}, ${personalInfo.country}`}</span></div>}
-            {personalInfo.website && (
-              <a href={personalInfo.website.startsWith('http') ? personalInfo.website : `https://${personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-blue-600 hover:underline">
-                <Icons.link size={14}/>
-                <span>{personalInfo.website.replace(/^https?:\/\//, '')}</span>
-              </a>
-            )}
+          <h2 className="text-md font-semibold text-gray-600 mt-1">{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
+          <div className="flex justify-center items-center gap-x-2 text-xs text-gray-600 mt-1 flex-wrap">
+            <span>{personalInfo.location}</span>
+            <span className="text-gray-400">|</span>
+            <span>{personalInfo.phone}</span>
+            <span className="text-gray-400">|</span>
+            <a href={`mailto:${personalInfo.email}`} className="text-blue-600 hover:underline">{personalInfo.email}</a>
+          </div>
+          <div className="flex justify-center items-center gap-x-2 text-xs text-gray-600 mt-1 flex-wrap">
+            {personalInfo.github && <span>Github: {renderLink(personalInfo.github)}</span>}
+            <span className="text-gray-400">|</span>
+            {personalInfo.linkedin && <span>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
+            <span className="text-gray-400">|</span>
+            {personalInfo.website && <span>Portfolio: {renderLink(personalInfo.website)}</span>}
           </div>
         </div>
 
         {/* Summary */}
-        <div className="space-y-2">
-          <h2 className="text-xl font-bold font-headline text-gray-700">Summary</h2>
-          <p className="text-sm leading-relaxed">{summary || 'A brief summary of your career and skills.'}</p>
+        <div className="space-y-1">
+          <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>PROFESSIONAL SUMMARY</h2>
+          <p className="leading-relaxed">{summary}</p>
         </div>
 
-        <Separator />
+        {/* Skills */}
+        <div className="space-y-1">
+          <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>SKILLS</h2>
+          <ul className="list-disc list-inside space-y-1">
+                {skills.map((skill) => (
+                    <li key={skill.id}>{skill.name}</li>
+                ))}
+            </ul>
+        </div>
+        
+        {/* Education */}
+        <div className="space-y-1">
+        <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>EDUCATION</h2>
+        {education.map((edu) => (
+            <div key={edu.id} className="space-y-0.5">
+                <div className="flex justify-between">
+                    <h3 className="font-bold">{edu.institution}</h3>
+                    <p className="text-gray-500">{edu.graduationDate}</p>
+                </div>
+                <ul className='list-disc list-inside'>
+                    <li>{edu.degree}</li>
+                </ul>
+            </div>
+        ))}
+        </div>
 
-        {/* Experience */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold font-headline text-gray-700">Experience</h2>
-          {experience.map((exp) => (
-            <div key={exp.id} className="space-y-1.5">
+        {/* Projects */}
+        <div className="space-y-2">
+          <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>PROJECTS</h2>
+          {projects.map((proj) => (
+            <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline">
-                <h3 className="font-bold text-md">{exp.jobTitle || 'Job Title'}</h3>
-                <div className="text-sm text-gray-500">{exp.startDate} - {exp.endDate}</div>
+                <h3 className="font-bold text-sm">
+                    {proj.name} ({proj.technologies}) –{' '}
+                    <a href={proj.link} target="_blank" rel="noopener noreferrer" className='text-blue-600 hover:underline'>Link</a>
+                </h3>
+                <div className="text-gray-500">{proj.endDate}</div>
               </div>
-              <div className="flex justify-between items-baseline">
-                <p className="font-semibold text-sm text-gray-600">{exp.company || 'Company'}</p>
-                <p className="text-sm text-gray-500">{exp.location || 'Location'}</p>
-              </div>
-              <ul className="list-disc list-inside pl-2 space-y-1 text-sm text-gray-500">
-                {(exp.bulletPoints.length > 0 ? exp.bulletPoints : exp.responsibilities ? [exp.responsibilities] : []).map((point, i) => (
+              <ul className="list-disc list-inside pl-2 space-y-1">
+                <li>{proj.description}</li>
+                {proj.bulletPoints.map((point, i) => (
                   <li key={i}>{point}</li>
                 ))}
               </ul>
@@ -66,32 +100,39 @@ export function ResumePreview() {
           ))}
         </div>
 
-        <Separator />
-        
-        <div className="grid grid-cols-2 gap-8">
-            {/* Education */}
-            <div className="space-y-4">
-            <h2 className="text-xl font-bold font-headline text-gray-700">Education</h2>
-            {education.map((edu) => (
-                <div key={edu.id} className="space-y-0.5">
-                <h3 className="font-bold text-md">{edu.degree || 'Degree'}</h3>
-                <p className="text-sm">{edu.institution || 'Institution'}</p>
-                <p className="text-sm text-gray-500">{edu.graduationDate || 'Graduation Date'}</p>
-                </div>
-            ))}
-            </div>
-
-            {/* Skills */}
-            <div className="space-y-2">
-            <h2 className="text-xl font-bold font-headline text-gray-700">Skills</h2>
-            <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                <span key={skill.id} className="bg-gray-100 text-gray-700 rounded-full px-3 py-1 text-xs font-medium">
-                    {skill.name}
-                </span>
+        {/* Experience */}
+        <div className="space-y-2">
+          <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>WORK EXPERIENCE</h2>
+          {experience.map((exp) => (
+            <div key={exp.id} className="space-y-1">
+              <div className="flex justify-between items-baseline">
+                <h3 className="font-bold text-sm">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
+                <div className="text-gray-500">{exp.startDate} - {exp.endDate}</div>
+              </div>
+              <ul className="list-disc list-inside pl-2 space-y-1">
+                <li>{exp.responsibilities}</li>
+                {(exp.bulletPoints.length > 0 ? exp.bulletPoints : []).map((point, i) => (
+                  <li key={i}>{point}</li>
                 ))}
+              </ul>
             </div>
-            </div>
+          ))}
+        </div>
+
+        {/* Certifications and Courses */}
+        <div className="space-y-1">
+            <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>CERTIFICATIONS AND COURSES</h2>
+            <ul className="list-disc list-inside space-y-1 grid grid-cols-2">
+                {certifications.map(cert => <li key={cert.id}>{cert.name}</li>)}
+            </ul>
+        </div>
+
+        {/* Achievements */}
+        <div className="space-y-1">
+            <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>ACHIEVEMENTS</h2>
+            <ul className="list-disc list-inside space-y-1">
+                {achievements.map(ach => <li key={ach.id}>{ach.name}</li>)}
+            </ul>
         </div>
       </div>
     </div>

@@ -2,12 +2,15 @@ export interface PersonalInfo {
   name: string;
   lastName?: string;
   jobTitle?: string;
+  jobTitle2?: string;
   email: string;
   phone: string;
   location: string;
   website: string;
   city?: string;
   country?: string;
+  github?: string;
+  linkedin?: string;
 }
 
 export interface Experience {
@@ -19,6 +22,16 @@ export interface Experience {
   endDate: string;
   responsibilities: string;
   bulletPoints: string[];
+}
+
+export interface Project {
+    id: string;
+    name: string;
+    technologies: string;
+    endDate: string;
+    link?: string;
+    description: string;
+    bulletPoints: string[];
 }
 
 export interface Education {
@@ -33,12 +46,25 @@ export interface Skill {
   name: string;
 }
 
+export interface Certification {
+    id: string;
+    name: string;
+}
+
+export interface Achievement {
+    id: string;
+    name: string;
+}
+
 export interface Resume {
   personalInfo: PersonalInfo;
   summary: string;
   experience: Experience[];
+  projects: Project[];
   education: Education[];
   skills: Skill[];
+  certifications: Certification[];
+  achievements: Achievement[];
   newSkill: string;
 }
 
