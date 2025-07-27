@@ -98,6 +98,8 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
         };
     case 'REMOVE_ACHIEVEMENT':
         return { ...state, achievements: state.achievements.filter((_, i) => i !== action.payload) };
+    case 'UPDATE_THEME':
+      return { ...state, theme: { ...state.theme, ...action.payload } };
     default:
       return state;
   }
@@ -111,7 +113,12 @@ export const ResumeProvider = ({ children }: { children: ReactNode }) => {
     try {
       const storedState = localStorage.getItem('resumeState');
       if (storedState) {
-        dispatch({ type: 'SET_STATE', payload: JSON.parse(storedState) });
+        const parsedState = JSON.parse(storedState);
+        // Ensure theme exists on stored state, otherwise merge with initial
+        if (!parsedState.theme) {
+          parsedState.theme = initialData.theme;
+        }
+        dispatch({ type: 'SET_STATE', payload: parsedState });
       }
     } catch (error) {
       console.error("Failed to parse resume state from localStorage", error);

@@ -9,7 +9,7 @@ import { useStep } from '@/hooks/use-step';
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 
-const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
+const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "DESIGN", "FINISH"];
 
 function Stepper() {
   const { step, setStep } = useStep();
@@ -47,9 +47,18 @@ function Stepper() {
 
 
 export function ResumeBuilder() {
-    const { step, nextStep, prevStep } = useStep();
+    const { step, nextStep, prevStep, setStep } = useStep();
     const isLastStep = step === steps.length;
     const isFirstStep = step === 1;
+
+    const handleNext = () => {
+      if (isLastStep) {
+        // Handle finish logic
+        console.log("Finished");
+      } else {
+        nextStep();
+      }
+    }
 
     const nextButtonText = isLastStep ? "Finish" : `Next to ${steps[step]}`;
 
@@ -68,7 +77,7 @@ export function ResumeBuilder() {
                                 <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
                                     <Icons.arrowLeft className="mr-2" /> Back
                                 </Button>
-                                <Button onClick={nextStep} className="w-full" size="lg">
+                                <Button onClick={handleNext} className="w-full" size="lg">
                                     {nextButtonText} {!isLastStep && <Icons.arrowRight className="ml-2" />}
                                 </Button>
                             </div>

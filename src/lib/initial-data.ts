@@ -110,4 +110,10 @@ export const initialData: Resume = {
       { id: '3', name: 'Project Management: Assigned tasks to 3 teammates and tracked weekly progress via GitHub.' },
   ],
   newSkill: '',
+  theme: {
+    fontFamily: 'Inter',
+    fontSize: 12,
+    lineHeight: 1.5,
+    primaryColor: '#000000',
+  }
 };

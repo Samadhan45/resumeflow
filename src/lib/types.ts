@@ -54,6 +54,13 @@ export interface Achievement {
     name: string;
 }
 
+export interface Theme {
+    fontFamily: string;
+    fontSize: number;
+    lineHeight: number;
+    primaryColor: string;
+}
+
 export interface Resume {
   personalInfo: PersonalInfo;
   summary: string;
@@ -64,6 +71,7 @@ export interface Resume {
   certifications: Certification[];
   achievements: Achievement[];
   newSkill: string;
+  theme: Theme;
 }
 
 export type Action =
@@ -90,4 +98,5 @@ export type Action =
   | { type: 'REMOVE_CERTIFICATION'; payload: number }
   | { type: 'ADD_ACHIEVEMENT' }
   | { type: 'UPDATE_ACHIEVEMENT'; payload: { index: number; key: string; value: string } }
-  | { type: 'REMOVE_ACHIEVEMENT'; payload: number };
+  | { type: 'REMOVE_ACHIEVEMENT'; payload: number }
+  | { type: 'UPDATE_THEME'; payload: Partial<Theme> };
