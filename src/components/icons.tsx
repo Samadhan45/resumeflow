@@ -25,6 +25,8 @@ import {
   ArrowRight,
   Lock,
   ChevronDown,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react';
 
 export const Icons = {
@@ -53,5 +55,7 @@ export const Icons = {
   arrowLeft: ArrowLeft,
   arrowRight: ArrowRight,
   lock: Lock,
-  chevronDown: ChevronDown
+  chevronDown: ChevronDown,
+  zoomIn: ZoomIn,
+  zoomOut: ZoomOut,
 };
