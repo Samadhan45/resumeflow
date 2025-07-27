@@ -86,7 +86,7 @@ export function ResumePreview() {
           {projects.map((proj) => (
             <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                <h3 className="font-bold text-sm whitespace-nowrap">
+                <h3 className="font-bold text-sm flex-shrink-0">
                     {proj.name} ({proj.technologies}) –{' '}
                     <a href={proj.link} target="_blank" rel="noopener noreferrer" className='text-blue-600 hover:underline'>Link</a>
                 </h3>
@@ -108,7 +108,7 @@ export function ResumePreview() {
           {experience.map((exp) => (
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                <h3 className="font-bold text-sm flex-grow">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
+                 <h3 className="font-bold text-sm flex-shrink-0">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
                 <div className="text-gray-500 text-right flex-shrink-0">{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1">
