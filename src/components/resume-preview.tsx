@@ -67,13 +67,15 @@ export function ResumePreview() {
         <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>EDUCATION</h2>
         {education.map((edu) => (
             <div key={edu.id} className="space-y-0.5">
-                <div className="flex justify-between">
-                    <h3 className="font-bold">{edu.institution}</h3>
-                    <p className="text-gray-500">{edu.graduationDate}</p>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h3 className="font-bold">{edu.institution}</h3>
+                        <ul className='list-disc list-inside'>
+                            <li>{edu.degree}</li>
+                        </ul>
+                    </div>
+                    <p className="text-gray-500 text-right flex-shrink-0">{edu.graduationDate}</p>
                 </div>
-                <ul className='list-disc list-inside'>
-                    <li>{edu.degree}</li>
-                </ul>
             </div>
         ))}
         </div>
@@ -88,7 +90,7 @@ export function ResumePreview() {
                     {proj.name} ({proj.technologies}) –{' '}
                     <a href={proj.link} target="_blank" rel="noopener noreferrer" className='text-blue-600 hover:underline'>Link</a>
                 </h3>
-                <div className="text-gray-500">{proj.endDate}</div>
+                <div className="text-gray-500 text-right flex-shrink-0">{proj.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1">
                 <li>{proj.description}</li>
@@ -107,7 +109,7 @@ export function ResumePreview() {
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline">
                 <h3 className="font-bold text-sm">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
-                <div className="text-gray-500">{exp.startDate} - {exp.endDate}</div>
+                <div className="text-gray-500 text-right flex-shrink-0">{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1">
                 <li>{exp.responsibilities}</li>
