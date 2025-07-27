@@ -85,7 +85,7 @@ export function ProjectsForm() {
                                 </div>
                                  <div>
                                     <Label htmlFor={`techStack-${index}`}>Tech Stack (comma-separated)</Label>
-                                    <Input id={`techStack-${index}`} name="techStack" value={proj.techStack.join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
+                                    <Input id={`techStack-${index}`} name="techStack" value={(proj.techStack || []).join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
                                 </div>
                             </div>
                         </AccordionContent>

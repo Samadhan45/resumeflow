@@ -122,7 +122,7 @@ export function EmploymentHistoryForm() {
                                 </div>
                                 <div>
                                     <Label htmlFor={`techStack-${index}`}>Tech Stack (comma-separated)</Label>
-                                    <Input id={`techStack-${index}`} name="techStack" value={exp.techStack.join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
+                                    <Input id={`techStack-${index}`} name="techStack" value={(exp.techStack || []).join(', ')} onChange={(e) => handleTechStackChange(index, e.target.value)} />
                                 </div>
                             </div>
                         </AccordionContent>
