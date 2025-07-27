@@ -27,7 +27,7 @@ export function ResumePreview() {
         {/* Header */}
         <div className="text-center">
           <h1 className="text-2xl font-bold font-headline text-gray-800 tracking-tight">
-            {personalInfo.name}
+            {personalInfo.name} {personalInfo.lastName}
           </h1>
           <h2 className="text-md font-semibold text-gray-600 mt-1">{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
           <div className="flex justify-center items-center gap-x-2 text-xs text-gray-600 mt-1 flex-wrap">
