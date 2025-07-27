@@ -89,12 +89,13 @@ export function ResumePreview() {
             <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2 flex-nowrap">
                 <h3 className="font-bold text-sm flex-1 shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
-                    <span className='mr-2'>{proj.name} ({proj.technologies}) –</span>
+                    <span className='mr-2'>{proj.name} –</span>
                     {proj.link && renderLink(proj.link)}
                 </h3>
                 <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
+                <li><span className='font-bold'>Tech Stack:</span> {proj.technologies}</li>
                 <li>{proj.description}</li>
                 {proj.bulletPoints.map((point, i) => (
                   <li key={i}>{point}</li>
@@ -110,12 +111,13 @@ export function ResumePreview() {
           {experience.map((exp) => (
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2 flex-nowrap">
-                 <h3 className="font-bold text-sm flex-1 shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
-                    <span className='mr-2'>{exp.company} – {exp.jobTitle} ({exp.location}) - Link</span>
+                 <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
+                    <span className='mr-2'>{exp.company} – {exp.jobTitle} ({exp.location})</span>
                 </h3>
                 <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
+                <li><span className='font-bold'>Tech Stack:</span> {exp.technologies}</li>
                 <li>{exp.responsibilities}</li>
                 {(exp.bulletPoints.length > 0 ? exp.bulletPoints : []).map((point, i) => (
                   <li key={i}>{point}</li>
@@ -144,5 +146,3 @@ export function ResumePreview() {
     </div>
   );
 }
-
-    

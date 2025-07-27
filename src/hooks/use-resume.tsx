@@ -16,7 +16,7 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
     case 'UPDATE_SUMMARY':
       return { ...state, summary: action.payload };
     case 'ADD_EXPERIENCE':
-      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', bulletPoints: [] }] };
+      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', technologies: '', bulletPoints: [] }] };
     case 'UPDATE_EXPERIENCE':
       return {
         ...state,

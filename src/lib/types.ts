@@ -19,6 +19,7 @@ export interface Experience {
   startDate: string;
   endDate: string;
   responsibilities: string;
+  technologies: string;
   bulletPoints: string[];
 }
 

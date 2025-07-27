@@ -89,17 +89,23 @@ export function EmploymentHistoryForm() {
                                         <Label htmlFor={`location-${index}`}>Location</Label>
                                         <Input id={`location-${index}`} name="location" value={exp.location} onChange={(e) => handleExperienceChange(index, e)} />
                                     </div>
+                                     <div>
+                                        <Label htmlFor={`technologies-${index}`}>Technologies</Label>
+                                        <Input id={`technologies-${index}`} name="technologies" value={exp.technologies} onChange={(e) => handleExperienceChange(index, e)} />
+                                    </div>
+                                </div>
+                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`startDate-${index}`}>Start Date</Label>
                                         <Input id={`startDate-${index}`} name="startDate" value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
                                     </div>
+                                    <div>
+                                        <Label htmlFor={`endDate-${index}`}>End Date</Label>
+                                        <Input id={`endDate-${index}`} name="endDate" value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} />
+                                    </div>
                                 </div>
                                 <div>
-                                    <Label htmlFor={`endDate-${index}`}>End Date</Label>
-                                    <Input id={`endDate-${index}`} name="endDate" value={exp.endDate} onChange={(e) => handleExperienceChange(index, e)} />
-                                </div>
-                                <div>
-                                    <Label htmlFor={`responsibilities-${index}`}>Responsibilities</Label>
+                                    <Label htmlFor={`responsibilities-${index}`}>Description</Label>
                                     <Textarea id={`responsibilities-${index}`} name="responsibilities" value={exp.responsibilities} onChange={(e) => handleExperienceChange(index, e)} />
                                 </div>
                                 <div>
