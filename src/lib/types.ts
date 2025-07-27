@@ -7,11 +7,8 @@ export interface PersonalInfo {
   phone: string;
   location: string;
   website: string;
-  city?: string;
-  country?: string;
   github?: string;
   linkedin?: string;
-  postalCode?: string;
 }
 
 export interface Experience {
@@ -87,4 +84,10 @@ export type Action =
   | { type: 'UPDATE_NEW_SKILL'; payload: string }
   | { type: 'ADD_SKILL' }
   | { type: 'UPDATE_SKILL'; payload: { index: number; value: string } }
-  | { type: 'REMOVE_SKILL'; payload: number };
+  | { type: 'REMOVE_SKILL'; payload: number }
+  | { type: 'ADD_CERTIFICATION' }
+  | { type: 'UPDATE_CERTIFICATION'; payload: { index: number; key: string; value: string } }
+  | { type: 'REMOVE_CERTIFICATION'; payload: number }
+  | { type: 'ADD_ACHIEVEMENT' }
+  | { type: 'UPDATE_ACHIEVEMENT'; payload: { index: number; key: string; value: string } }
+  | { type: 'REMOVE_ACHIEVEMENT'; payload: number };

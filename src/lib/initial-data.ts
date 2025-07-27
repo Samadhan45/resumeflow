@@ -2,7 +2,8 @@ import type { Resume } from './types';
 
 export const initialData: Resume = {
   personalInfo: {
-    name: 'SAMADHAN VILAS KADAM',
+    name: 'SAMADHAN',
+    lastName: 'KADAM',
     jobTitle: 'Java Developer',
     jobTitle2: 'Full Stack Developer',
     email: 'samadhankadam002@gmail.com',

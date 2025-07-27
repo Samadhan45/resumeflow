@@ -9,13 +9,13 @@ import { useStep } from '@/hooks/use-step';
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
 
-const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "SUMMARY", "FINISH"];
+const steps = ["CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
 
 function Stepper() {
   const { step } = useStep();
   return (
     <div className="flex justify-center items-center py-4 px-8">
-      <div className="flex items-center w-full max-w-2xl mx-auto">
+      <div className="flex items-center w-full max-w-4xl mx-auto">
         {steps.map((name, index) => {
           const stepNumber = index + 1;
           const isActive = step === stepNumber;
@@ -30,7 +30,7 @@ function Stepper() {
                 >
                   {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
-                <p className={`mt-2 text-xs font-semibold w-20 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
+                <p className={`mt-2 text-xs font-semibold w-24 ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}
                 </p>
               </div>

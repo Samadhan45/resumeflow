@@ -76,6 +76,28 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
           };
     case 'REMOVE_SKILL':
       return { ...state, skills: state.skills.filter((_, i) => i !== action.payload) };
+    case 'ADD_CERTIFICATION':
+        return { ...state, certifications: [...state.certifications, { id: nanoid(), name: '' }] };
+    case 'UPDATE_CERTIFICATION':
+        return {
+            ...state,
+            certifications: state.certifications.map((cert, i) =>
+            i === action.payload.index ? { ...cert, [action.payload.key]: action.payload.value } : cert
+            ),
+        };
+    case 'REMOVE_CERTIFICATION':
+        return { ...state, certifications: state.certifications.filter((_, i) => i !== action.payload) };
+    case 'ADD_ACHIEVEMENT':
+        return { ...state, achievements: [...state.achievements, { id: nanoid(), name: '' }] };
+    case 'UPDATE_ACHIEVEMENT':
+        return {
+            ...state,
+            achievements: state.achievements.map((ach, i) =>
+            i === action.payload.index ? { ...ach, [action.payload.key]: action.payload.value } : ach
+            ),
+        };
+    case 'REMOVE_ACHIEVEMENT':
+        return { ...state, achievements: state.achievements.filter((_, i) => i !== action.payload) };
     default:
       return state;
   }

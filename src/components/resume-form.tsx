@@ -9,6 +9,8 @@ import { EducationForm } from './steps/education-form';
 import { SkillsForm } from './steps/skills-form';
 import { SummaryForm } from './steps/summary-form';
 import { FinishForm } from './steps/finish-form';
+import { CertificationsForm } from './steps/certifications-form';
+import { AchievementsForm } from './steps/achievements-form';
 
 export function ResumeForm() {
   const { step } = useStep();
@@ -20,8 +22,10 @@ export function ResumeForm() {
       {step === 3 && <ProjectsForm />}
       {step === 4 && <EducationForm />}
       {step === 5 && <SkillsForm />}
-      {step === 6 && <SummaryForm />}
-      {step === 7 && <FinishForm />}
+      {step === 6 && <CertificationsForm />}
+      {step === 7 && <AchievementsForm />}
+      {step === 8 && <SummaryForm />}
+      {step === 9 && <FinishForm />}
     </div>
   );
 }
