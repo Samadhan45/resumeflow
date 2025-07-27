@@ -89,10 +89,6 @@ export function EmploymentHistoryForm() {
                                         <Label htmlFor={`location-${index}`}>Location</Label>
                                         <Input id={`location-${index}`} name="location" value={exp.location} onChange={(e) => handleExperienceChange(index, e)} />
                                     </div>
-                                     <div>
-                                        <Label htmlFor={`technologies-${index}`}>Technologies</Label>
-                                        <Input id={`technologies-${index}`} name="technologies" value={exp.technologies} onChange={(e) => handleExperienceChange(index, e)} />
-                                    </div>
                                 </div>
                                  <div className="grid grid-cols-2 gap-4">
                                     <div>

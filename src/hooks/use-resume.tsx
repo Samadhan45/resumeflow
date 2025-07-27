@@ -16,7 +16,7 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
     case 'UPDATE_SUMMARY':
       return { ...state, summary: action.payload };
     case 'ADD_EXPERIENCE':
-      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', technologies: '', bulletPoints: [] }] };
+      return { ...state, experience: [...state.experience, { id: nanoid(), jobTitle: '', company: '', location: '', startDate: '', endDate: '', responsibilities: '', bulletPoints: [] }] };
     case 'UPDATE_EXPERIENCE':
       return {
         ...state,
@@ -34,7 +34,7 @@ const resumeReducer = (state: Resume, action: Action): Resume => {
     case 'REMOVE_EXPERIENCE':
       return { ...state, experience: state.experience.filter((_, i) => i !== action.payload) };
     case 'ADD_PROJECT':
-        return { ...state, projects: [...state.projects, { id: nanoid(), name: '', technologies: '', endDate: '', description: '', bulletPoints: [] }] };
+        return { ...state, projects: [...state.projects, { id: nanoid(), name: '', endDate: '', description: '', bulletPoints: [] }] };
     case 'UPDATE_PROJECT':
         return {
             ...state,

@@ -18,7 +18,6 @@ export const initialData: Resume = {
     {
       id: '1',
       name: 'HisabKitab – Full Stack Finance WebApp',
-      technologies: 'Next.js, Tailwind CSS, Clerk, Gemini AI, PostgreSQL',
       endDate: 'May 2025',
       link: '#',
       description: 'Helps users track income, expenses, and current balance with real-time financial insights.',
@@ -30,7 +29,6 @@ export const initialData: Resume = {
     {
       id: '2',
       name: 'CertVault – Document Management WebApp',
-      technologies: 'React Hooks, JavaScript, CSS, Open AI',
       endDate: 'Jul 2024',
       link: '#',
       description: 'Built a secure, responsive platform to upload and manage 100+ documents with Firebase Auth & Firestore.',
@@ -42,7 +40,6 @@ export const initialData: Resume = {
     {
         id: '3',
         name: 'AI Portfolio WebApp',
-        technologies: 'Firebase, TypeScript, Tailwind CSS, Resend',
         endDate: 'Jul 2024',
         link: '#',
         description: 'Built a high-performance portfolio with dynamic routing and responsive UI using ShadCN and Tailwind CSS.',
@@ -58,7 +55,6 @@ export const initialData: Resume = {
         jobTitle: 'Web Development Intern',
         company: 'Elite Software',
         location: 'Pune, India',
-        technologies: 'Django, Python, cPanel',
         startDate: 'Oct 2024',
         endDate: 'Nov 2024',
         responsibilities: 'Developed secure, full-stack web applications using Django. Focusing on the admin dashboard and user role management.',
@@ -72,7 +68,6 @@ export const initialData: Resume = {
         jobTitle: 'Web Development Intern',
         company: 'Social Digital Wings',
         location: 'Remote',
-        technologies: 'React.js, JavaScript, HTML, CSS',
         startDate: 'Apr 2021',
         endDate: 'May 2021',
         responsibilities: 'Led a team of 4 students to build a fully responsive React.js dashboard for internal project tracking and analytics.',
@@ -97,6 +92,7 @@ export const initialData: Resume = {
     { id: '4', name: 'Databases: Oracle SQL, PostgreSQL, MongoDB' },
     { id: '5', name: 'Developer Tools: Git, GitHub, VS Code, Eclipse' },
     { id: '6', name: 'Soft Skills: Problem-solving, Teamwork, Adaptability, Time Management, Patience' },
+    { id: '7', name: 'Tech Stacks: Next.js, Tailwind CSS, Clerk, Gemini AI, PostgreSQL, React Hooks, JavaScript, CSS, Open AI, Firebase, TypeScript, Resend, Django, Python, cPanel' },
   ],
   certifications: [
       { id: '1', name: 'Java: Core Java & Advanced Java – QSpiders' },

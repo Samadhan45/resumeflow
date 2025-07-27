@@ -55,10 +55,6 @@ export function ProjectsForm() {
                                     <Label htmlFor={`name-${index}`}>Project Name</Label>
                                     <Input id={`name-${index}`} name="name" value={proj.name} onChange={(e) => handleProjectChange(index, e)} />
                                 </div>
-                                <div>
-                                    <Label htmlFor={`technologies-${index}`}>Technologies</Label>
-                                    <Input id={`technologies-${index}`} name="technologies" value={proj.technologies} onChange={(e) => handleProjectChange(index, e)} />
-                                </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`endDate-${index}`}>End Date</Label>

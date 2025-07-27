@@ -19,14 +19,12 @@ export interface Experience {
   startDate: string;
   endDate: string;
   responsibilities: string;
-  technologies: string;
   bulletPoints: string[];
 }
 
 export interface Project {
     id: string;
     name: string;
-    technologies: string;
     endDate: string;
     link?: string;
     description: string;

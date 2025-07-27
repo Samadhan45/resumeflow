@@ -95,7 +95,6 @@ export function ResumePreview() {
                 <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
-                <li><span className='font-bold'>Tech Stack:</span> {proj.technologies}</li>
                 <li>{proj.description}</li>
                 {proj.bulletPoints.map((point, i) => (
                   <li key={i}>{point}</li>
@@ -117,7 +116,6 @@ export function ResumePreview() {
                 <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
-                <li><span className='font-bold'>Tech Stack:</span> {exp.technologies}</li>
                 <li>{exp.responsibilities}</li>
                 {(exp.bulletPoints.length > 0 ? exp.bulletPoints : []).map((point, i) => (
                   <li key={i}>{point}</li>
