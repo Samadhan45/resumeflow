@@ -70,11 +70,15 @@ export function ResumeBuilder() {
         </header>
         <div className="flex-1 overflow-hidden">
             <PanelGroup direction="horizontal" className="h-full">
-                <Panel defaultSize={50} minSize={30}>
-                    <main className="flex-1 flex flex-col justify-center items-center p-4 md:p-8 h-full overflow-auto">
-                        <div className="w-full max-w-lg">
-                            <ResumeForm />
-                            <div className="mt-8 grid grid-cols-2 gap-4">
+                <Panel defaultSize={50} minSize={40}>
+                    <main className="flex flex-col h-full">
+                        <div className="flex-1 overflow-y-auto p-4 md:p-8">
+                            <div className="w-full max-w-lg mx-auto">
+                                <ResumeForm />
+                            </div>
+                        </div>
+                        <div className="p-4 md:p-8 border-t bg-white">
+                             <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                                 <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
                                     <Icons.arrowLeft className="mr-2" /> Back
                                 </Button>
