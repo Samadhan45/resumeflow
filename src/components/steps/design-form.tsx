@@ -1,11 +1,17 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useResume } from '@/hooks/use-resume';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Textarea } from '../ui/textarea';
+import { Button } from '../ui/button';
+import { Icons } from '../icons';
+import { generateResumeFromJd } from '@/ai/flows/generate-resume-from-jd';
+import { useToast } from '@/hooks/use-toast';
+import { Separator } from '../ui/separator';
 
 
 const fontFamilies = [
@@ -79,6 +85,9 @@ function FontStyleControls({ title, type }: FontStyleControlsProps) {
 export function DesignForm() {
     const { state, dispatch } = useResume();
     const { theme } = state;
+    const [jobDescription, setJobDescription] = useState('');
+    const [generating, setGenerating] = useState(false);
+    const {toast} = useToast();
 
     const handleGlobalThemeChange = (key: string, value: any) => {
         dispatch({
@@ -87,12 +96,62 @@ export function DesignForm() {
         });
     };
 
+    const handleGenerateResume = async () => {
+        if (!jobDescription.trim()) {
+            toast({
+                title: 'Job Description Required',
+                description: 'Please paste a job description to generate a resume.',
+                variant: 'destructive'
+            });
+            return;
+        }
+        setGenerating(true);
+        try {
+            const { resume: generatedResume } = await generateResumeFromJd({
+                jobDescription,
+                currentResume: state,
+            });
+            dispatch({ type: 'SET_STATE', payload: generatedResume as any });
+            toast({
+                title: 'Resume Generated!',
+                description: 'Your new resume has been generated based on the job description.',
+            });
+        } catch (error) {
+            console.error('Failed to generate resume:', error);
+             toast({
+                title: 'Generation Failed',
+                description: 'There was an error generating your resume. Please try again.',
+                variant: 'destructive'
+            });
+        } finally {
+            setGenerating(false);
+        }
+    };
+
     return (
         <div className="space-y-8">
             <div className="text-center">
                 <h1 className="text-3xl font-bold">Customize your <span className="text-blue-600">resume design</span></h1>
-                <p className="text-gray-500 mt-2">Adjust the appearance of your resume.</p>
+                <p className="text-gray-500 mt-2">Adjust the appearance of your resume or generate one with AI.</p>
             </div>
+            
+            <div className="space-y-4 p-4 border rounded-lg">
+                <h3 className="text-lg font-semibold">Generate with AI</h3>
+                <p className="text-sm text-muted-foreground">Paste a job description below and let our AI tailor your resume for the role.</p>
+                <Label htmlFor="job-description">Job Description</Label>
+                <Textarea id="job-description" placeholder="Paste job description here..." rows={6} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)}/>
+                <Button onClick={handleGenerateResume} disabled={generating} className="w-full">
+                    {generating ? 'Generating...' : <><Icons.sparkles className="mr-2" />Generate Resume from Job Description</>}
+                </Button>
+            </div>
+            
+            <Separator />
+
+            <div className="text-center">
+                <p className="text-gray-500 mt-2">More templates are coming soon.</p>
+            </div>
+            
+            <Separator />
             
             <div className='space-y-4'>
                 <h3 className="text-lg font-semibold">Global Styles</h3>
