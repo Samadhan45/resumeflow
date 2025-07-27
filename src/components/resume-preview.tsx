@@ -88,11 +88,11 @@ export function ResumePreview() {
           {projects.map((proj) => (
             <div key={proj.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                <h3 className="font-bold text-sm flex-shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
-                    {proj.name} ({proj.technologies}) –{' '}
+                <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
+                    <span className='mr-2'>{proj.name} ({proj.technologies}) –</span>
                     {proj.link && renderLink(proj.link)}
                 </h3>
-                <div className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
+                <div className="text-gray-500 text-right flex-shrink-0" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{proj.description}</li>
@@ -110,8 +110,11 @@ export function ResumePreview() {
           {experience.map((exp) => (
             <div key={exp.id} className="space-y-1">
               <div className="flex justify-between items-baseline gap-2">
-                 <h3 className="font-bold text-sm flex-shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" style={{color: 'var(--link-color)'}} className="hover:underline">Link</a></h3>
-                <div className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
+                 <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
+                    <span className='mr-2'>{exp.company} – {exp.jobTitle} ({exp.location}) -</span>
+                    <a href="#" style={{color: 'var(--link-color)'}} className="hover:underline">Link</a>
+                </h3>
+                <div className="text-gray-500 text-right flex-shrink-0" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{exp.responsibilities}</li>

@@ -31,7 +31,7 @@ export const initialData: Resume = {
       id: '2',
       name: 'CertVault – Document Management WebApp',
       technologies: 'React Hooks, JavaScript, CSS, Open AI',
-      endDate: 'July 2024',
+      endDate: 'Jul 2024',
       link: '#',
       description: 'Built a secure, responsive platform to upload and manage 100+ documents with Firebase Auth & Firestore.',
       bulletPoints: [
@@ -43,7 +43,7 @@ export const initialData: Resume = {
         id: '3',
         name: 'AI Portfolio WebApp',
         technologies: 'Firebase, TypeScript, Tailwind CSS, Resend',
-        endDate: 'July 2024',
+        endDate: 'Jul 2024',
         link: '#',
         description: 'Built a high-performance portfolio with dynamic routing and responsive UI using ShadCN and Tailwind CSS.',
         bulletPoints: [
@@ -85,7 +85,7 @@ export const initialData: Resume = {
       id: '1',
       degree: 'B.E. in Computer Engineering',
       institution: 'Savitribai Phule Pune University, Pune, India',
-      graduationDate: 'Dec 2021 - May 2025',
+      graduationDate: '2021 - 2025',
     },
   ],
   skills: [
