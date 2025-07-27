@@ -99,7 +99,7 @@ export function ResumeBuilder() {
                 </Panel>
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
                 <Panel defaultSize={60} minSize={40}>
-                     <div onWheel={handleWheel} className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-center h-full overflow-auto">
+                     <div className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-center h-full overflow-auto">
                         <div className="absolute top-4 right-4 flex items-center gap-2">
                             <Button variant="outline" size="icon" onClick={() => setZoom(z => z + 0.1)}>
                                 <Icons.zoomIn className="w-4 h-4" />
@@ -108,7 +108,7 @@ export function ResumeBuilder() {
                                 <Icons.zoomOut className="w-4 h-4" />
                             </Button>
                         </div>
-                        <div className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }}>
+                        <div onWheel={handleWheel} className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'center' }}>
                             <ResumePreview />
                         </div>
                     </div>
