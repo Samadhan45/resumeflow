@@ -61,18 +61,33 @@
 }
 
 @media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
   body * {
     visibility: hidden;
   }
+  
   #resume-preview, #resume-preview * {
     visibility: visible;
   }
+
+  .resume-preview-container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
   #resume-preview {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     border: none;
@@ -81,7 +96,8 @@
     background-color: #fff;
     color: #000;
   }
-  .resume-preview-container, .resume-preview {
+
+  .resume-preview {
     box-shadow: none !important;
     border-radius: 0 !important;
     border: none !important;
