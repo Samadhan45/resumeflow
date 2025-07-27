@@ -11,6 +11,7 @@ export interface PersonalInfo {
   country?: string;
   github?: string;
   linkedin?: string;
+  postalCode?: string;
 }
 
 export interface Experience {
