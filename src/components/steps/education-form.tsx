@@ -34,14 +34,14 @@ export function EducationForm() {
             <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
                 {state.education.map((edu, index) => (
                     <AccordionItem value={`item-${index}`} key={edu.id}>
-                        <AccordionTrigger>
-                            <div className="flex justify-between w-full items-center pr-4">
+                        <div className="flex justify-between w-full items-center pr-2">
+                            <AccordionTrigger className="flex-1">
                                 <span>{edu.institution || `Education ${index + 1}`}</span>
-                                <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); handleRemoveEducation(index);}}>
-                                    <Icons.trash className="h-4 w-4 text-red-500" />
-                                </Button>
-                            </div>
-                        </AccordionTrigger>
+                            </AccordionTrigger>
+                             <Button variant="ghost" size="icon" onClick={() => handleRemoveEducation(index)}>
+                                <Icons.trash className="h-4 w-4 text-red-500" />
+                            </Button>
+                        </div>
                         <AccordionContent>
                             <div className="space-y-4 p-1">
                                 <div>

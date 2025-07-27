@@ -47,14 +47,14 @@ export function ProjectsForm() {
             <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
                 {state.projects.map((proj, index) => (
                     <AccordionItem value={`item-${index}`} key={proj.id}>
-                        <AccordionTrigger>
-                            <div className="flex justify-between w-full items-center pr-4">
+                        <div className="flex justify-between w-full items-center pr-2">
+                            <AccordionTrigger className="flex-1">
                                 <span>{proj.name || `Project ${index + 1}`}</span>
-                                <Button variant="ghost" size="icon" onClick={(e) => {e.stopPropagation(); handleRemoveProject(index);}}>
-                                    <Icons.trash className="h-4 w-4 text-red-500" />
-                                </Button>
-                            </div>
-                        </AccordionTrigger>
+                            </AccordionTrigger>
+                            <Button variant="ghost" size="icon" onClick={() => handleRemoveProject(index)}>
+                                <Icons.trash className="h-4 w-4 text-red-500" />
+                            </Button>
+                        </div>
                         <AccordionContent>
                             <div className="space-y-4 p-1">
                                 <div>
