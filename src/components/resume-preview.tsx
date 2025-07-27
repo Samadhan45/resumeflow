@@ -19,9 +19,9 @@ export function ResumePreview() {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden aspect-[8.5/11] max-w-4xl mx-auto">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col">
       <div
-        className="p-8 md:p-12 space-y-4 bg-white text-gray-800 h-full overflow-auto text-xs"
+        className="p-8 md:p-12 space-y-4 bg-white text-gray-800 flex-1 overflow-auto text-xs"
         style={themeStyle}
       >
         {/* Header */}
