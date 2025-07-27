@@ -85,8 +85,8 @@ export function ResumePreview() {
           <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>PROJECTS</h2>
           {projects.map((proj) => (
             <div key={proj.id} className="space-y-1">
-              <div className="flex justify-between items-baseline">
-                <h3 className="font-bold text-sm">
+              <div className="flex justify-between items-baseline gap-2">
+                <h3 className="font-bold text-sm whitespace-nowrap">
                     {proj.name} ({proj.technologies}) –{' '}
                     <a href={proj.link} target="_blank" rel="noopener noreferrer" className='text-blue-600 hover:underline'>Link</a>
                 </h3>
@@ -107,8 +107,8 @@ export function ResumePreview() {
           <h2 className="text-sm font-bold font-headline text-gray-700 border-b-2" style={{borderColor: 'var(--primary-print)'}}>WORK EXPERIENCE</h2>
           {experience.map((exp) => (
             <div key={exp.id} className="space-y-1">
-              <div className="flex justify-between items-baseline">
-                <h3 className="font-bold text-sm">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
+              <div className="flex justify-between items-baseline gap-2">
+                <h3 className="font-bold text-sm flex-grow">{exp.company} – {exp.jobTitle} ({exp.location}) - <a href="#" className="text-blue-600 hover:underline">Link</a></h3>
                 <div className="text-gray-500 text-right flex-shrink-0">{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1">
