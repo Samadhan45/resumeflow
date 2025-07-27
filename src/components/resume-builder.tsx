@@ -88,7 +88,7 @@ export function ResumeBuilder() {
                 <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
                 <Panel defaultSize={50} minSize={30}>
                     <div className="resume-preview-container bg-gray-100 p-4 md:p-8 flex items-center justify-center h-full overflow-auto">
-                        <div className="w-[8.5in] h-[11in] transform scale-[0.6] -translate-y-16 origin-top">
+                        <div className="w-[8.5in] h-[11in] transform scale-[0.6] origin-center">
                             <ResumePreview />
                         </div>
                     </div>
