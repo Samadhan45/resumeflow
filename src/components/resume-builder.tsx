@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import { useStep } from '@/hooks/use-step';
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import { Logo } from './logo';
 
 
 const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
@@ -65,8 +66,14 @@ export function ResumeBuilder() {
 
   return (
     <div className="h-screen bg-gray-50 flex flex-col">
-       <header className="sticky top-0 z-10 w-full border-b bg-white">
-          <Stepper />
+       <header className="sticky top-0 z-10 w-full border-b bg-white flex items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <Logo />
+            <h1 className="text-xl font-bold font-headline">ResumeFlow</h1>
+          </div>
+          <div className="flex-1">
+            <Stepper />
+          </div>
         </header>
         <div className="flex-1 overflow-hidden">
             <PanelGroup direction="horizontal" className="h-full">
