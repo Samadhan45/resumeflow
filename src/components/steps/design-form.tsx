@@ -12,6 +12,8 @@ import { Icons } from '../icons';
 import { generateResumeFromJd } from '@/ai/flows/generate-resume-from-jd';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '../ui/separator';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
+import type { Resume } from '@/lib/types';
 
 
 const fontFamilies = [
@@ -88,6 +90,7 @@ export function DesignForm() {
     const [jobDescription, setJobDescription] = useState('');
     const [generating, setGenerating] = useState(false);
     const {toast} = useToast();
+    const [generatedResume, setGeneratedResume] = useState<Resume | null>(null);
 
     const handleGlobalThemeChange = (key: string, value: any) => {
         dispatch({
@@ -107,16 +110,12 @@ export function DesignForm() {
         }
         setGenerating(true);
         try {
-            const { resume: generatedResume } = await generateResumeFromJd({
+            const { resume } = await generateResumeFromJd({
                 jobDescription,
                 currentResume: state,
             });
-            if (generatedResume) {
-              dispatch({ type: 'SET_STATE', payload: { ...state, ...generatedResume } });
-              toast({
-                  title: 'Resume Generated!',
-                  description: 'Your new resume has been generated based on the job description.',
-              });
+            if (resume) {
+                setGeneratedResume(resume as Resume);
             } else {
               throw new Error("AI did not return a resume.");
             }
@@ -131,6 +130,27 @@ export function DesignForm() {
             setGenerating(false);
         }
     };
+    
+    const handleAcceptChanges = () => {
+        if (generatedResume) {
+            dispatch({ type: 'SET_STATE', payload: { ...state, ...generatedResume } });
+            toast({
+                title: 'Resume Updated!',
+                description: 'Your resume has been updated with the AI-generated content.',
+            });
+        }
+        setGeneratedResume(null);
+    };
+
+    const handleDiscardChanges = () => {
+        setGeneratedResume(null);
+        toast({
+            title: 'Changes Discarded',
+            description: 'The AI-generated changes have been discarded.',
+            variant: 'default'
+        });
+    };
+
 
     return (
         <div className="space-y-8">
@@ -197,6 +217,21 @@ export function DesignForm() {
                 <FontStyleControls title="Body Text" type="body" />
                 <FontStyleControls title="Links" type="link" />
             </Accordion>
+            
+            <AlertDialog open={!!generatedResume} onOpenChange={(open) => !open && setGeneratedResume(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Apply AI-Generated Changes?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                           The AI has generated a new version of your resume based on the job description. Would you like to apply these changes? You can review them in the preview pane.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel onClick={handleDiscardChanges}>Discard</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleAcceptChanges}>Accept</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 }
