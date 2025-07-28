@@ -37,7 +37,7 @@ function Stepper() {
                 >
                   {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
-                <p className={`mt-2 text-xs font-semibold ${isMobile ? 'w-16' : ''} ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
+                <p className={`mt-2 text-xs font-semibold ${isMobile ? 'w-16' : ''} ${isActive || isCompleted ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}
                 </p>
               </button>
@@ -185,3 +185,5 @@ export function ResumeBuilder() {
     </div>
   );
 }
+
+    

@@ -3,7 +3,6 @@ import { useResume } from '@/hooks/use-resume';
 import { Icons } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 export function ResumePreview() {
   const { state } = useResume();
@@ -19,13 +18,13 @@ export function ResumePreview() {
     if (!url) return null;
     const fullUrl = url.startsWith('http') ? url : `https://${url}`;
     const displayUrl = url.replace(/^https?:\/\//, '');
-    return <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="hover:underline" style={{color: 'var(--link-color)'}}>{displayUrl}</a>
+    return <a href={fullUrl} target="_blank" rel="noopener noreferrer" className="hover:underline break-all" style={{color: 'var(--link-color)'}}>{displayUrl}</a>
   }
 
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col">
+    <div className="overflow-hidden w-full h-full flex flex-col bg-white">
       <div
-        className="p-8 md:p-12 space-y-4 flex-1 overflow-auto resume-preview"
+        className="p-8 md:p-12 space-y-4 flex-1 overflow-auto resume-preview text-black"
         style={themeStyle}
       >
         {/* Header */}
@@ -162,3 +161,5 @@ export function ResumePreview() {
     </div>
   );
 }
+
+    
