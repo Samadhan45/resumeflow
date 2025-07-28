@@ -23,7 +23,7 @@ export function PersonalDetailsForm() {
        </div>
 
       <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="name" className="text-xs font-bold text-gray-500">FIRST NAME (MANDATORY)</Label>
             <Input id="name" name="name" placeholder="Peter" value={state.personalInfo.name} onChange={handlePersonalInfoChange} />
@@ -34,7 +34,7 @@ export function PersonalDetailsForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <Label htmlFor="jobTitle" className="text-xs font-bold text-gray-500">JOB TITLE 1</Label>
                 <Input id="jobTitle" name="jobTitle" placeholder="Java Developer" value={state.personalInfo.jobTitle || ''} onChange={handlePersonalInfoChange} />
@@ -45,7 +45,7 @@ export function PersonalDetailsForm() {
             </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <Label htmlFor="location" className="text-xs font-bold text-gray-500">LOCATION</Label>
                 <Input id="location" name="location" placeholder="Pune, India" value={state.personalInfo.location || ''} onChange={handlePersonalInfoChange} />
@@ -61,7 +61,7 @@ export function PersonalDetailsForm() {
             <Input id="email" name="email" type="email" placeholder="e.g. mail@example.com" value={state.personalInfo.email} onChange={handlePersonalInfoChange} />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <Label htmlFor="github" className="text-xs font-bold text-gray-500">GITHUB</Label>
                 <Input id="github" name="github" placeholder="github.com/username" value={state.personalInfo.github || ''} onChange={handlePersonalInfoChange} />

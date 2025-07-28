@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useResume } from '@/hooks/use-resume';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,9 +10,11 @@ import { Textarea } from '../ui/textarea';
 
 export function ProjectsForm() {
     const { state, dispatch } = useResume();
+    const [openAccordion, setOpenAccordion] = useState(state.projects.length > 0 ? 'item-0' : undefined);
 
     const handleAddProject = () => {
         dispatch({ type: 'ADD_PROJECT' });
+        setOpenAccordion(`item-${state.projects.length}`);
     };
 
     const handleRemoveProject = (index: number) => {
@@ -44,7 +46,7 @@ export function ProjectsForm() {
                 <h1 className="text-3xl font-bold">Your awesome <span className="text-blue-600">projects</span></h1>
                 <p className="text-gray-500 mt-2">Showcase your best work.</p>
              </div>
-            <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
+            <Accordion type="single" collapsible className="w-full" value={openAccordion} onValueChange={setOpenAccordion}>
                 {state.projects.map((proj, index) => (
                     <AccordionItem value={`item-${index}`} key={proj.id}>
                         <div className="flex justify-between w-full items-center pr-2">
@@ -61,7 +63,7 @@ export function ProjectsForm() {
                                     <Label htmlFor={`name-${index}`}>Project Name</Label>
                                     <Input id={`name-${index}`} name="name" value={proj.name} onChange={(e) => handleProjectChange(index, e)} />
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`endDate-${index}`}>End Date</Label>
                                         <Input id={`endDate-${index}`} name="endDate" value={proj.endDate} onChange={(e) => handleProjectChange(index, e)} />

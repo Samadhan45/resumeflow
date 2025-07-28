@@ -17,7 +17,7 @@ import {
 export function EmploymentHistoryForm() {
     const { state, dispatch } = useResume();
     const [generating, setGenerating] = useState<number | null>(null);
-    const [openAccordion, setOpenAccordion] = useState('item-0');
+    const [openAccordion, setOpenAccordion] = useState(state.experience.length > 0 ? 'item-0' : undefined);
 
     const handleAddExperience = () => {
         dispatch({ type: 'ADD_EXPERIENCE' });
@@ -81,7 +81,7 @@ export function EmploymentHistoryForm() {
                         </div>
                         <AccordionContent>
                             <div className="space-y-4 p-1">
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`jobTitle-${index}`}>Job Title</Label>
                                         <Input id={`jobTitle-${index}`} name="jobTitle" value={exp.jobTitle} onChange={(e) => handleExperienceChange(index, e)} />
@@ -91,13 +91,13 @@ export function EmploymentHistoryForm() {
                                         <Input id={`company-${index}`} name="company" value={exp.company} onChange={(e) => handleExperienceChange(index, e)} />
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`location-${index}`}>Location</Label>
                                         <Input id={`location-${index}`} name="location" value={exp.location} onChange={(e) => handleExperienceChange(index, e)} />
                                     </div>
                                 </div>
-                                 <div className="grid grid-cols-2 gap-4">
+                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`startDate-${index}`}>Start Date</Label>
                                         <Input id={`startDate-${index}`} name="startDate" value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
@@ -112,10 +112,12 @@ export function EmploymentHistoryForm() {
                                     <Textarea id={`responsibilities-${index}`} name="responsibilities" value={exp.responsibilities} onChange={(e) => handleExperienceChange(index, e)} />
                                 </div>
                                 <div>
-                                    <Label>Bullet Points</Label>
-                                    <Button size="sm" variant="outline" className="ml-2" onClick={() => handleGenerateBulletPoints(index)} disabled={generating === index}>
-                                        {generating === index ? 'Generating...' : <><Icons.sparkles className="mr-2" />Autofill with AI</>}
-                                    </Button>
+                                    <div className="flex items-center justify-between">
+                                        <Label>Bullet Points</Label>
+                                        <Button size="sm" variant="outline" className="ml-2" onClick={() => handleGenerateBulletPoints(index)} disabled={generating === index}>
+                                            {generating === index ? 'Generating...' : <><Icons.sparkles className="mr-2 h-4 w-4" />Autofill with AI</>}
+                                        </Button>
+                                    </div>
                                     <div className="mt-2 space-y-2">
                                         {(exp.bulletPoints || []).map((point, i) => (
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />

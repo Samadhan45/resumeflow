@@ -27,7 +27,7 @@ export function ResumeForm() {
       {step === 7 && <CertificationsForm />}
       {step === 8 && <AchievementsForm />}
       {step === 9 && <SummaryForm />}
-      {step === 10 && <FinishForm />}
+      {step > 9 && <FinishForm />}
     </div>
   );
 }

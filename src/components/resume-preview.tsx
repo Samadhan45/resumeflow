@@ -3,10 +3,12 @@ import { useResume } from '@/hooks/use-resume';
 import { Icons } from '@/components/icons';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export function ResumePreview() {
   const { state } = useResume();
   const { personalInfo, summary, projects, experience, education, skills, certifications, achievements, theme } = state;
+  const isMobile = useIsMobile();
 
   const themeStyle = {
     '--primary-print': theme.sectionHeading.color,
@@ -35,17 +37,17 @@ export function ResumePreview() {
           <h2 className="text-md font-semibold mt-1" style={{ color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px` }}>{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             <span>{personalInfo.location}</span>
-            <span className="text-gray-400">|</span>
-            <span>{personalInfo.phone}</span>
-            <span className="text-gray-400">|</span>
-            <a href={`mailto:${personalInfo.email}`} className="hover:underline" style={{color: 'var(--link-color)'}}>{personalInfo.email}</a>
+            {!isMobile && <span className="text-gray-400">|</span>}
+            <span className='md:mt-0 mt-1'>{personalInfo.phone}</span>
+             {!isMobile && <span className="text-gray-400">|</span>}
+            <a href={`mailto:${personalInfo.email}`} className="hover:underline md:mt-0 mt-1" style={{color: 'var(--link-color)'}}>{personalInfo.email}</a>
           </div>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             {personalInfo.github && <span>Github: {renderLink(personalInfo.github)}</span>}
-            {personalInfo.github && <span className="text-gray-400">|</span>}
-            {personalInfo.linkedin && <span>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
-            {personalInfo.linkedin && <span className="text-gray-400">|</span>}
-            {personalInfo.website && <span>Portfolio: {renderLink(personalInfo.website)}</span>}
+            {personalInfo.github && !isMobile && <span className="text-gray-400">|</span>}
+            {personalInfo.linkedin && <span className='md:mt-0 mt-1'>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
+            {personalInfo.linkedin && !isMobile && <span className="text-gray-400">|</span>}
+            {personalInfo.website && <span className='md:mt-0 mt-1'>Portfolio: {renderLink(personalInfo.website)}</span>}
           </div>
         </div>
 
@@ -70,14 +72,14 @@ export function ResumePreview() {
         <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>EDUCATION</h2>
         {(education || []).map((edu) => (
             <div key={edu.id} className="space-y-0.5">
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start flex-col md:flex-row">
                     <div className='flex-grow' style={{lineHeight: theme.lineHeight}}>
                         <h3 className="font-bold" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>{edu.institution}</h3>
                         <ul className='list-disc list-inside' style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>
                             <li>{edu.degree}</li>
                         </ul>
                     </div>
-                    <p className="text-gray-500 text-right flex-shrink-0 ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{edu.graduationDate}</p>
+                    <p className="text-gray-500 text-right flex-shrink-0 ml-0 md:ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{edu.graduationDate}</p>
                 </div>
             </div>
         ))}
@@ -88,7 +90,7 @@ export function ResumePreview() {
           <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>PROJECTS</h2>
           {(projects || []).map((proj) => (
             <div key={proj.id} className="space-y-1">
-              <div className="flex justify-between items-baseline gap-2 flex-nowrap">
+              <div className="flex justify-between items-baseline gap-2 flex-col md:flex-row">
                 <h3 className="font-bold text-sm flex-1 shrink-0" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
                     <span className='mr-2'>{proj.name} –</span>
                     {proj.link && renderLink(proj.link)}
@@ -118,7 +120,7 @@ export function ResumePreview() {
           <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>WORK EXPERIENCE</h2>
           {(experience || []).map((exp) => (
             <div key={exp.id} className="space-y-1">
-              <div className="flex justify-between items-baseline gap-2 flex-nowrap">
+              <div className="flex justify-between items-baseline gap-2 flex-col md:flex-row">
                  <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
                     <span className='mr-2'>{exp.company} – {exp.jobTitle} ({exp.location})</span>
                 </h3>
@@ -145,7 +147,7 @@ export function ResumePreview() {
         {/* Certifications and Courses */}
         <div className="space-y-1">
             <h2 className="text-sm font-bold font-headline border-b-2" style={{borderColor: 'var(--primary-print)', color: 'var(--primary-print)', fontSize: `${theme.sectionHeading.fontSize}px`}}>CERTIFICATIONS AND COURSES</h2>
-            <ul className="list-disc list-inside space-y-1 grid grid-cols-2" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
+            <ul className="list-disc list-inside space-y-1 grid grid-cols-1 md:grid-cols-2" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 {(certifications || []).map(cert => <li key={cert.id}>{cert.name}</li>)}
             </ul>
         </div>
