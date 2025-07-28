@@ -105,7 +105,7 @@ export function ResumeBuilder() {
                             <Icons.zoomOut className="w-4 h-4" />
                         </Button>
                     </div>
-                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-background shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
+                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
                         <ResumePreview />
                     </div>
                 </div>
@@ -125,7 +125,7 @@ export function ResumeBuilder() {
                 </TabsContent>
                 <TabsContent value="preview" className="data-[state=inactive]:hidden bg-muted/30">
                     <div className="relative resume-preview-container p-4 flex justify-center items-start h-full overflow-auto">
-                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-background shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
+                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
                             <ResumePreview />
                         </div>
                     </div>

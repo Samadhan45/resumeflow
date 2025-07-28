@@ -108,6 +108,9 @@
     border-radius: 0 !important;
     border: none !important;
     height: 100vh;
+    background-color: #fff !important;
+    color: #000 !important;
     --primary-print: hsl(var(--primary));
   }
 }
+

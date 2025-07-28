@@ -23,9 +23,9 @@ export function ResumePreview() {
   }
 
   return (
-    <div className="bg-background shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col text-foreground">
+    <div className="shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col">
       <div
-        className="p-8 md:p-12 space-y-4 bg-background flex-1 overflow-auto"
+        className="p-8 md:p-12 space-y-4 flex-1 overflow-auto resume-preview"
         style={themeStyle}
       >
         {/* Header */}
