@@ -23,9 +23,9 @@ export function ResumePreview() {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col">
+    <div className="bg-background shadow-lg rounded-lg overflow-hidden w-full h-full flex flex-col text-foreground">
       <div
-        className="p-8 md:p-12 space-y-4 bg-white text-gray-800 flex-1 overflow-auto"
+        className="p-8 md:p-12 space-y-4 bg-background flex-1 overflow-auto"
         style={themeStyle}
       >
         {/* Header */}
@@ -36,16 +36,16 @@ export function ResumePreview() {
           <h2 className="text-md font-semibold mt-1" style={{ color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px` }}>{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             <span>{personalInfo.location}</span>
-            <span className="text-gray-400 hidden sm:inline">|</span>
+            <span className="text-muted-foreground/50 hidden sm:inline">|</span>
             <span className='md:mt-0 mt-1'>{personalInfo.phone}</span>
-            <span className="text-gray-400 hidden sm:inline">|</span>
+            <span className="text-muted-foreground/50 hidden sm:inline">|</span>
             <a href={`mailto:${personalInfo.email}`} className="hover:underline md:mt-0 mt-1" style={{color: 'var(--link-color)'}}>{personalInfo.email}</a>
           </div>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             {personalInfo.github && <span>Github: {renderLink(personalInfo.github)}</span>}
-            {personalInfo.github && <span className="text-gray-400 hidden sm:inline">|</span>}
+            {personalInfo.github && <span className="text-muted-foreground/50 hidden sm:inline">|</span>}
             {personalInfo.linkedin && <span className='md:mt-0 mt-1'>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
-            {personalInfo.linkedin && <span className="text-gray-400 hidden sm:inline">|</span>}
+            {personalInfo.linkedin && <span className="text-muted-foreground/50 hidden sm:inline">|</span>}
             {personalInfo.website && <span className='md:mt-0 mt-1'>Portfolio: {renderLink(personalInfo.website)}</span>}
           </div>
         </div>
@@ -78,7 +78,7 @@ export function ResumePreview() {
                             <li>{edu.degree}</li>
                         </ul>
                     </div>
-                    <p className="text-gray-500 text-right flex-shrink-0 ml-0 md:ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{edu.graduationDate}</p>
+                    <p className="text-muted-foreground text-right flex-shrink-0 ml-0 md:ml-4" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{edu.graduationDate}</p>
                 </div>
             </div>
         ))}
@@ -94,7 +94,7 @@ export function ResumePreview() {
                     <span className='mr-2'>{proj.name} –</span>
                     {proj.link && renderLink(proj.link)}
                 </h3>
-                <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
+                <div className="text-muted-foreground text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{proj.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{proj.description}</li>
@@ -106,7 +106,7 @@ export function ResumePreview() {
                 <div className="flex flex-wrap gap-1 pt-1">
                   <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
                    {(proj.techStack || []).map((tech, i) => (
-                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
+                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal">{tech}</Badge>
                    ))}
                 </div>
               )}
@@ -123,7 +123,7 @@ export function ResumePreview() {
                  <h3 className="font-bold text-sm flex-1" style={{color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px`}}>
                     <span className='mr-2'>{exp.company} – {exp.jobTitle} ({exp.location})</span>
                 </h3>
-                <div className="text-gray-500 text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
+                <div className="text-muted-foreground text-right flex-shrink-0 whitespace-nowrap" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`}}>{exp.startDate} - {exp.endDate}</div>
               </div>
               <ul className="list-disc list-inside pl-2 space-y-1" style={{color: theme.body.color, fontSize: `${theme.body.fontSize}px`, lineHeight: theme.lineHeight}}>
                 <li>{exp.responsibilities}</li>
@@ -135,7 +135,7 @@ export function ResumePreview() {
                 <div className="flex flex-wrap gap-1 pt-1">
                     <span className="font-bold text-xs" style={{color: theme.subheading.color}}>Tech Stack: </span>
                    {(exp.techStack || []).map((tech, i) => (
-                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal" style={{backgroundColor: 'hsl(var(--secondary))', color: 'hsl(var(--secondary-foreground))'}}>{tech}</Badge>
+                     <Badge key={i} variant="secondary" className="px-1.5 py-0.5 text-xs font-normal">{tech}</Badge>
                    ))}
                 </div>
               )}

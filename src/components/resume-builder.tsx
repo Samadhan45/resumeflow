@@ -10,6 +10,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { Logo } from './logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ThemeToggle } from './theme-toggle';
 
 
 const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
@@ -80,7 +81,7 @@ export function ResumeBuilder() {
                         </div>
                     </div>
                    {!isFinished && (
-                    <div className="p-4 md:p-8 border-t bg-white">
+                    <div className="p-4 md:p-8 border-t bg-card">
                          <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                             <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
                                 <Icons.arrowLeft className="mr-2" /> Back
@@ -95,7 +96,7 @@ export function ResumeBuilder() {
             </Panel>
             <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
             <Panel defaultSize={60} minSize={40}>
-                 <div className="relative resume-preview-container bg-gray-100 p-4 md:p-8 flex justify-center items-start h-full overflow-auto">
+                 <div className="relative resume-preview-container bg-muted/30 p-4 md:p-8 flex justify-center items-start h-full overflow-auto">
                     <div className="absolute top-4 right-4 flex items-center gap-2">
                         <Button variant="outline" size="icon" onClick={() => setZoom(z => z + 0.1)}>
                             <Icons.zoomIn className="w-4 h-4" />
@@ -104,7 +105,7 @@ export function ResumeBuilder() {
                             <Icons.zoomOut className="w-4 h-4" />
                         </Button>
                     </div>
-                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
+                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-background shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
                         <ResumePreview />
                     </div>
                 </div>
@@ -122,16 +123,16 @@ export function ResumeBuilder() {
                         </div>
                     </main>
                 </TabsContent>
-                <TabsContent value="preview" className="data-[state=inactive]:hidden bg-gray-100">
+                <TabsContent value="preview" className="data-[state=inactive]:hidden bg-muted/30">
                     <div className="relative resume-preview-container p-4 flex justify-center items-start h-full overflow-auto">
-                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
+                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-background shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
                             <ResumePreview />
                         </div>
                     </div>
                 </TabsContent>
             </div>
             {!isFinished && (
-                <div className='sticky bottom-0 bg-white border-t'>
+                <div className='sticky bottom-0 bg-card border-t'>
                     <div className="p-4 grid grid-cols-2 gap-4 max-w-lg mx-auto">
                         <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
                             <Icons.arrowLeft className="mr-2" /> Back
@@ -141,8 +142,8 @@ export function ResumeBuilder() {
                         </Button>
                     </div>
                     <TabsList className="grid w-full grid-cols-2 h-14 rounded-none">
-                        <TabsTrigger value="form" className="h-full text-lg data-[state=active]:bg-gray-100 data-[state=active]:shadow-none rounded-none">Form</TabsTrigger>
-                        <TabsTrigger value="preview" className="h-full text-lg data-[state=active]:bg-gray-100 data-[state=active]:shadow-none rounded-none">Preview</TabsTrigger>
+                        <TabsTrigger value="form" className="h-full text-lg data-[state=active]:bg-muted data-[state=active]:shadow-none rounded-none">Form</TabsTrigger>
+                        <TabsTrigger value="preview" className="h-full text-lg data-[state=active]:bg-muted data-[state=active]:shadow-none rounded-none">Preview</TabsTrigger>
                     </TabsList>
                 </div>
             )}
@@ -155,14 +156,17 @@ export function ResumeBuilder() {
     );
 
   return (
-    <div className="h-screen bg-gray-50 flex flex-col">
-       <header className="sticky top-0 z-10 w-full border-b bg-white flex items-center justify-between px-4">
+    <div className="h-screen bg-background flex flex-col">
+       <header className="sticky top-0 z-10 w-full border-b bg-card flex items-center justify-between px-4">
           <div className="flex items-center gap-2 flex-shrink-0">
             <Logo />
             <h1 className="text-xl font-bold font-headline hidden sm:block">ResumeFlow</h1>
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 px-4">
             <Stepper />
+          </div>
+          <div className="flex-shrink-0">
+            <ThemeToggle />
           </div>
         </header>
         <div className="flex-1 overflow-hidden">
