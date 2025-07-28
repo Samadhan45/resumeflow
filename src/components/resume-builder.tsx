@@ -25,7 +25,7 @@ function Stepper() {
         {steps.map((name, index) => {
           const stepNumber = index + 1;
           const isActive = step === stepNumber;
-          const isCompleted = step > stepNumber || (step === steps.length + 1); // Mark all as completed on finish
+          const isCompleted = step > stepNumber || (step === steps.length + 1); 
           return (
             <React.Fragment key={name}>
               <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer disabled:cursor-not-allowed" disabled={step > steps.length}>
@@ -36,12 +36,12 @@ function Stepper() {
                 >
                   {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
-                <p className={`mt-2 text-xs font-semibold ${isMobile ? 'w-16' : 'w-24'} ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
+                <p className={`mt-2 text-xs font-semibold ${isMobile ? 'w-16' : ''} ${isActive ? 'text-blue-500' : 'text-gray-500'}`}>
                   {name}
                 </p>
               </button>
               {index < steps.length - 1 && (
-                <div className={`flex-1 h-0.5 mx-2 ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
+                <div className={`flex-1 h-0.5 ${isMobile ? 'min-w-[20px]' : 'mx-2'} ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
               )}
             </React.Fragment>
           );
@@ -113,40 +113,43 @@ export function ResumeBuilder() {
     );
 
     const mobileLayout = (
-        <Tabs defaultValue="form" className="flex flex-col h-full">
-            <TabsContent value="form" className="flex-1 overflow-y-auto data-[state=inactive]:hidden">
-                 <main className="flex flex-col h-full">
-                    <div className="flex-1 overflow-y-auto p-4">
+        <Tabs defaultValue="form" className="flex flex-col h-full w-full">
+            <div className="flex-1 overflow-y-auto">
+                <TabsContent value="form" className="data-[state=inactive]:hidden p-4">
+                     <main className="flex flex-col h-full">
                         <div className="w-full max-w-lg mx-auto">
                             <ResumeForm />
                         </div>
-                    </div>
-                   {!isFinished && (
-                    <div className="p-4 border-t bg-white sticky bottom-0">
-                         <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
-                            <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
-                                <Icons.arrowLeft className="mr-2" /> Back
-                            </Button>
-                            <Button onClick={handleNext} className="w-full" size="lg">
-                                {nextButtonText} {!isLastStep && <Icons.arrowRight className="ml-2" />}
-                            </Button>
+                    </main>
+                </TabsContent>
+                <TabsContent value="preview" className="data-[state=inactive]:hidden bg-gray-100">
+                    <div className="relative resume-preview-container p-4 flex justify-center items-start h-full overflow-auto">
+                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
+                            <ResumePreview />
                         </div>
                     </div>
-                   )}
-                </main>
-            </TabsContent>
-            <TabsContent value="preview" className="flex-1 overflow-y-auto bg-gray-100 data-[state=inactive]:hidden">
-                <div className="relative resume-preview-container p-4 flex justify-center items-start h-full overflow-auto">
-                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.4)`, transformOrigin: 'top center' }}>
-                        <ResumePreview />
-                    </div>
-                </div>
-            </TabsContent>
+                </TabsContent>
+            </div>
             {!isFinished && (
-                <TabsList className="grid w-full grid-cols-2 h-14 rounded-none">
-                    <TabsTrigger value="form" className="h-full text-lg">Form</TabsTrigger>
-                    <TabsTrigger value="preview" className="h-full text-lg">Preview</TabsTrigger>
-                </TabsList>
+                <div className='sticky bottom-0 bg-white border-t'>
+                    <div className="p-4 grid grid-cols-2 gap-4 max-w-lg mx-auto">
+                        <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
+                            <Icons.arrowLeft className="mr-2" /> Back
+                        </Button>
+                        <Button onClick={handleNext} className="w-full" size="lg">
+                            {nextButtonText} {!isLastStep && <Icons.arrowRight className="ml-2" />}
+                        </Button>
+                    </div>
+                    <TabsList className="grid w-full grid-cols-2 h-14 rounded-none">
+                        <TabsTrigger value="form" className="h-full text-lg data-[state=active]:bg-gray-100 data-[state=active]:shadow-none rounded-none">Form</TabsTrigger>
+                        <TabsTrigger value="preview" className="h-full text-lg data-[state=active]:bg-gray-100 data-[state=active]:shadow-none rounded-none">Preview</TabsTrigger>
+                    </TabsList>
+                </div>
+            )}
+            {isFinished && (
+                 <div className="p-4">
+                    <ResumeForm />
+                 </div>
             )}
         </Tabs>
     );
@@ -156,7 +159,7 @@ export function ResumeBuilder() {
        <header className="sticky top-0 z-10 w-full border-b bg-white flex items-center justify-between px-4">
           <div className="flex items-center gap-2 flex-shrink-0">
             <Logo />
-            <h1 className="text-xl font-bold font-headline">ResumeFlow</h1>
+            <h1 className="text-xl font-bold font-headline hidden sm:block">ResumeFlow</h1>
           </div>
           <div className="flex-1 min-w-0">
             <Stepper />

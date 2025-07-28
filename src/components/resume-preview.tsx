@@ -8,7 +8,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 export function ResumePreview() {
   const { state } = useResume();
   const { personalInfo, summary, projects, experience, education, skills, certifications, achievements, theme } = state;
-  const isMobile = useIsMobile();
 
   const themeStyle = {
     '--primary-print': theme.sectionHeading.color,
@@ -37,16 +36,16 @@ export function ResumePreview() {
           <h2 className="text-md font-semibold mt-1" style={{ color: theme.subheading.color, fontSize: `${theme.subheading.fontSize}px` }}>{personalInfo.jobTitle} - {personalInfo.jobTitle2}</h2>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             <span>{personalInfo.location}</span>
-            {!isMobile && <span className="text-gray-400">|</span>}
+            <span className="text-gray-400 hidden sm:inline">|</span>
             <span className='md:mt-0 mt-1'>{personalInfo.phone}</span>
-             {!isMobile && <span className="text-gray-400">|</span>}
+            <span className="text-gray-400 hidden sm:inline">|</span>
             <a href={`mailto:${personalInfo.email}`} className="hover:underline md:mt-0 mt-1" style={{color: 'var(--link-color)'}}>{personalInfo.email}</a>
           </div>
           <div className="flex justify-center items-center gap-x-2 text-xs mt-1 flex-wrap" style={{ color: theme.body.color, fontSize: `${theme.body.fontSize}px` }}>
             {personalInfo.github && <span>Github: {renderLink(personalInfo.github)}</span>}
-            {personalInfo.github && !isMobile && <span className="text-gray-400">|</span>}
+            {personalInfo.github && <span className="text-gray-400 hidden sm:inline">|</span>}
             {personalInfo.linkedin && <span className='md:mt-0 mt-1'>LinkedIn: {renderLink(personalInfo.linkedin)}</span>}
-            {personalInfo.linkedin && !isMobile && <span className="text-gray-400">|</span>}
+            {personalInfo.linkedin && <span className="text-gray-400 hidden sm:inline">|</span>}
             {personalInfo.website && <span className='md:mt-0 mt-1'>Portfolio: {renderLink(personalInfo.website)}</span>}
           </div>
         </div>
