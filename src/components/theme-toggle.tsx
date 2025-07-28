@@ -12,25 +12,29 @@ import {
 
 export function useTheme() {
     const [theme, setThemeState] = React.useState('light');
+    const [mounted, setMounted] = React.useState(false);
 
     React.useEffect(() => {
-        const isDark = document.documentElement.classList.contains('dark');
-        setThemeState(isDark ? 'dark' : 'light');
+        setMounted(true);
     }, []);
 
     React.useEffect(() => {
-        const storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
-        setTheme(storedTheme);
-    }, []);
+        if (mounted) {
+            const storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
+            setTheme(storedTheme);
+        }
+    }, [mounted]);
 
     const setTheme = (theme: string) => {
-        localStorage.setItem('theme', theme);
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        if (mounted) {
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            setThemeState(theme);
         }
-        setThemeState(theme);
     };
     
     return { theme, setTheme };
