@@ -1,7 +1,3 @@
-
----
-
-```markdown
 # 📄 ResumeFlow – Resume Generation Web App
 
 **ResumeFlow** is a sleek and intuitive web application built using **Next.js**, **Tailwind CSS**, and **TypeScript** that allows users to generate professional resumes in seconds. Users can input their personal and professional details, and a downloadable PDF resume is generated at the end of the flow.
