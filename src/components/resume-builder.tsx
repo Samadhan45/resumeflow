@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ResumeForm } from '@/components/resume-form';
 import { ResumePreview } from '@/components/resume-preview';
 import { Button } from '@/components/ui/button';
@@ -56,10 +56,16 @@ function Stepper() {
 export function ResumeBuilder() {
     const { step, nextStep, prevStep } = useStep();
     const [zoom, setZoom] = useState(0.8);
+    const [mounted, setMounted] = useState(false);
+    const isMobile = useIsMobile();
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const isLastStep = step === steps.length;
     const isFirstStep = step === 1;
     const isFinished = step > steps.length;
-    const isMobile = useIsMobile();
 
     const handleNext = () => {
       if (isLastStep) {
@@ -154,6 +160,10 @@ export function ResumeBuilder() {
             )}
         </Tabs>
     );
+    
+  if (!mounted) {
+    return null; // or a loading spinner
+  }
 
   return (
     <div className="h-screen bg-background flex flex-col">

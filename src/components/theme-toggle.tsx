@@ -16,26 +16,38 @@ export function useTheme() {
 
     React.useEffect(() => {
         setMounted(true);
-    }, []);
-
-    React.useEffect(() => {
-        if (mounted) {
-            const storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
-            setTheme(storedTheme);
-        }
-    }, [mounted]);
-
-    const setTheme = (theme: string) => {
-        if (mounted) {
-            localStorage.setItem('theme', theme);
-            if (theme === 'dark') {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setThemeState(storedTheme);
+            if (storedTheme === 'dark') {
                 document.documentElement.classList.add('dark');
             } else {
-                document.documentElement.classList.remove('dark');
+                 document.documentElement.classList.remove('dark');
             }
-            setThemeState(theme);
+        } else {
+            const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light';
+            setThemeState(systemTheme);
+             if (systemTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                 document.documentElement.classList.remove('dark');
+            }
         }
+    }, []);
+
+    const setTheme = (theme: string) => {
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        setThemeState(theme);
     };
+    
+    if (!mounted) {
+        return { theme: 'light', setTheme };
+    }
     
     return { theme, setTheme };
 }
