@@ -11,7 +11,7 @@ const Typewriter = ({ text }: { text: string }) => {
   const [displayedText, setDisplayedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
+  const [typingSpeed, setTypingSpeed] = useState(100); // Faster initial speed
   const toRotate = [text];
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Typewriter = ({ text }: { text: string }) => {
     return () => {
       clearInterval(ticker);
     };
-  }, [displayedText]);
+  }, [displayedText, typingSpeed]); // Added typingSpeed to dependency array
 
   const tick = () => {
     let i = loopNum % toRotate.length;
@@ -34,16 +34,16 @@ const Typewriter = ({ text }: { text: string }) => {
     setDisplayedText(updatedText);
 
     if (isDeleting) {
-      setTypingSpeed(prevSpeed => prevSpeed / 2);
+      setTypingSpeed(50); // Faster deleting
     }
 
     if (!isDeleting && updatedText === fullText) {
       setIsDeleting(true);
-      setTypingSpeed(2000);
+      setTypingSpeed(1500); // Shorter pause
     } else if (isDeleting && updatedText === '') {
       setIsDeleting(false);
       setLoopNum(loopNum + 1);
-      setTypingSpeed(150);
+      setTypingSpeed(100); // Faster typing
     }
   };
 
