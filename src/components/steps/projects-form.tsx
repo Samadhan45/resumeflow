@@ -83,6 +83,12 @@ export function ProjectsForm() {
                                         {(proj.bulletPoints || []).map((point, i) => (
                                             <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} placeholder={`Feature ${i + 1}`} />
                                         ))}
+                                        <Button variant="outline" size="sm" onClick={() => {
+                                            const bullets = [...(proj.bulletPoints || []), ''];
+                                            dispatch({ type: 'UPDATE_PROJECT_BULLETS', payload: { index, bullets } });
+                                        }}>
+                                            <Icons.add className="mr-2 h-4 w-4" /> Add Feature
+                                        </Button>
                                     </div>
                                 </div>
                                  <div>
