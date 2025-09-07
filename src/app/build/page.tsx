@@ -1,3 +1,5 @@
+'use client';
+
 import { ResumeProvider } from '@/hooks/use-resume';
 import { StepProvider } from '@/hooks/use-step';
 import dynamic from 'next/dynamic';

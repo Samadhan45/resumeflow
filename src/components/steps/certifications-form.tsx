@@ -28,22 +28,22 @@ export function CertificationsForm() {
     return (
         <div className="space-y-8">
             <div className="text-center">
-                <h1 className="text-3xl font-bold">Your <span className="text-blue-600">certifications</span></h1>
-                <p className="text-gray-500 mt-2">List your relevant certifications.</p>
+                <h1 className="text-3xl font-bold">Your <span className="text-primary">certifications</span></h1>
+                <p className="text-muted-foreground mt-2">List your relevant certifications.</p>
             </div>
             <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
                 {state.certifications.map((cert, index) => (
                     <AccordionItem value={`item-${index}`} key={cert.id}>
-                        <div className="flex justify-between w-full items-center pr-2">
-                            <AccordionTrigger className="flex-1">
+                        <div className="flex justify-between w-full items-center">
+                            <AccordionTrigger className="flex-1 text-left">
                                 <span>{cert.name || `Certification ${index + 1}`}</span>
                             </AccordionTrigger>
                             <Button variant="ghost" size="icon" onClick={() => handleRemoveCertification(index)}>
-                                <Icons.trash className="h-4 w-4 text-red-500" />
+                                <Icons.trash className="h-4 w-4 text-destructive" />
                             </Button>
                         </div>
                         <AccordionContent>
-                            <div className="space-y-4 p-1">
+                            <div className="space-y-4 p-1 pt-0">
                                 <div>
                                     <Label htmlFor={`name-${index}`}>Certification Name</Label>
                                     <Input id={`name-${index}`} name="name" value={cert.name} onChange={(e) => handleCertificationChange(index, e)} />
@@ -54,7 +54,7 @@ export function CertificationsForm() {
                 ))}
             </Accordion>
             <Button onClick={handleAddCertification} variant="outline" className="w-full">
-                <Icons.add className="mr-2" /> Add Certification
+                <Icons.add /> Add Certification
             </Button>
         </div>
     );

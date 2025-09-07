@@ -28,22 +28,22 @@ export function EducationForm() {
     return (
         <div className="space-y-8">
             <div className="text-center">
-                <h1 className="text-3xl font-bold">Your <span className="text-blue-600">education</span></h1>
-                <p className="text-gray-500 mt-2">Tell us about your education.</p>
+                <h1 className="text-3xl font-bold">Your <span className="text-primary">education</span></h1>
+                <p className="text-muted-foreground mt-2">Tell us about your education.</p>
             </div>
             <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
                 {state.education.map((edu, index) => (
                     <AccordionItem value={`item-${index}`} key={edu.id}>
-                        <div className="flex justify-between w-full items-center pr-2">
-                            <AccordionTrigger className="flex-1">
+                        <div className="flex justify-between w-full items-center">
+                            <AccordionTrigger className="flex-1 text-left">
                                 <span>{edu.institution || `Education ${index + 1}`}</span>
                             </AccordionTrigger>
                              <Button variant="ghost" size="icon" onClick={() => handleRemoveEducation(index)}>
-                                <Icons.trash className="h-4 w-4 text-red-500" />
+                                <Icons.trash className="h-4 w-4 text-destructive" />
                             </Button>
                         </div>
                         <AccordionContent>
-                            <div className="space-y-4 p-1">
+                            <div className="space-y-4 p-1 pt-0">
                                 <div>
                                     <Label htmlFor={`institution-${index}`}>Institution</Label>
                                     <Input id={`institution-${index}`} name="institution" value={edu.institution} onChange={(e) => handleEducationChange(index, e)} />
@@ -62,7 +62,7 @@ export function EducationForm() {
                 ))}
             </Accordion>
             <Button onClick={handleAddEducation} variant="outline" className="w-full">
-                <Icons.add className="mr-2" /> Add Education
+                <Icons.add /> Add Education
             </Button>
         </div>
     );

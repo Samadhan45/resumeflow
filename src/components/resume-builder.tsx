@@ -34,17 +34,17 @@ function Stepper() {
               <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer disabled:cursor-not-allowed group" disabled={step > steps.length}>
                 <div
                   className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${
-                    isActive || isCompleted ? 'border-blue-500' : 'border-gray-300 group-hover:border-blue-300'
-                  } ${isCompleted ? 'bg-blue-500' : 'bg-background'}`}
+                    isActive || isCompleted ? 'border-primary' : 'border-gray-300 group-hover:border-primary/50'
+                  } ${isCompleted ? 'bg-primary' : 'bg-background'}`}
                 >
-                  {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
+                  {isCompleted && <Icons.check className="w-4 h-4 text-primary-foreground" />}
                 </div>
-                <p className={`mt-2 text-xs font-semibold transition-colors duration-300 ${isMobile ? 'w-16' : ''} ${isActive || isCompleted ? 'text-blue-500' : 'text-gray-500 group-hover:text-blue-500'}`}>
+                <p className={`mt-2 text-xs font-semibold transition-colors duration-300 ${isMobile ? 'w-16' : ''} ${isActive || isCompleted ? 'text-primary' : 'text-gray-500 group-hover:text-primary'}`}>
                   {name}
                 </p>
               </button>
               {index < steps.length - 1 && (
-                <div className={`flex-1 h-0.5 transition-colors duration-300 ${isMobile ? 'min-w-[20px]' : 'mx-2'} ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
+                <div className={`flex-1 h-0.5 transition-colors duration-300 ${isMobile ? 'min-w-[20px]' : 'mx-2'} ${isCompleted ? 'bg-primary' : 'bg-gray-300'}`} />
               )}
             </React.Fragment>
           );
@@ -77,7 +77,7 @@ export function ResumeBuilder() {
       }
     }
     
-    const nextButtonText = isLastStep ? "Finish" : `Next to ${steps[step]}`;
+    const nextButtonText = isLastStep ? "Finish & Preview" : `Next to ${steps[step]}`;
 
     const desktopLayout = (
        <PanelGroup direction="horizontal" className="h-full">
@@ -92,28 +92,28 @@ export function ResumeBuilder() {
                     <div className="p-4 md:p-8 border-t bg-card">
                          <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto">
                             <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
-                                <Icons.arrowLeft className="mr-2" /> Back
+                                <Icons.arrowLeft /> Back
                             </Button>
                             <Button onClick={handleNext} className="w-full" size="lg">
-                                {nextButtonText} {!isLastStep && <Icons.arrowRight className="ml-2" />}
+                                {nextButtonText} {!isLastStep && <Icons.arrowRight />}
                             </Button>
                         </div>
                     </div>
                    )}
                 </main>
             </Panel>
-            <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-gray-300 transition-colors" />
+            <PanelResizeHandle className="w-2 bg-gray-200 hover:bg-primary/20 transition-colors" />
             <Panel defaultSize={60} minSize={40}>
                  <div className="relative resume-preview-container bg-muted/30 p-4 md:p-8 flex justify-center items-start h-full overflow-auto">
-                    <div className="absolute top-4 right-4 flex items-center gap-2">
+                    <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
                         <Button variant="outline" size="icon" onClick={() => setZoom(z => z + 0.1)}>
-                            <Icons.zoomIn className="w-4 h-4" />
+                            <Icons.zoomIn />
                         </Button>
                          <Button variant="outline" size="icon" onClick={() => setZoom(z => Math.max(0.2, z - 0.1))}>
-                            <Icons.zoomOut className="w-4 h-4" />
+                            <Icons.zoomOut />
                         </Button>
                     </div>
-                    <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
+                    <div id="resume-preview" className="w-[8.5in] min-h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
                         <ResumePreview />
                     </div>
                 </div>
@@ -124,16 +124,16 @@ export function ResumeBuilder() {
     const mobileLayout = (
         <Tabs defaultValue="form" className="flex flex-col h-full w-full">
             <div className="flex-1 overflow-y-auto">
-                <TabsContent value="form" className="data-[state=inactive]:hidden p-4">
+                <TabsContent value="form" className="data-[state=inactive]:hidden p-4 mt-0">
                      <main className="flex flex-col h-full">
                         <div className="w-full max-w-lg mx-auto">
                             <ResumeForm />
                         </div>
                     </main>
                 </TabsContent>
-                <TabsContent value="preview" className="data-[state=inactive]:hidden bg-muted/30">
+                <TabsContent value="preview" className="data-[state=inactive]:hidden bg-muted/30 mt-0">
                     <div className="relative resume-preview-container p-4 flex justify-center items-start h-full overflow-auto">
-                        <div id="resume-preview" className="w-[8.5in] h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
+                        <div id="resume-preview" className="w-[8.5in] min-h-[11in] bg-white shadow-lg transition-transform duration-300 ease-in-out" style={{ transform: `scale(0.45)`, transformOrigin: 'top center' }}>
                             <ResumePreview />
                         </div>
                     </div>
@@ -143,10 +143,10 @@ export function ResumeBuilder() {
                 <div className='sticky bottom-0 bg-card border-t'>
                     <div className="p-4 grid grid-cols-2 gap-4 max-w-lg mx-auto">
                         <Button onClick={prevStep} variant="outline" size="lg" disabled={isFirstStep}>
-                            <Icons.arrowLeft className="mr-2" /> Back
+                            <Icons.arrowLeft /> Back
                         </Button>
                         <Button onClick={handleNext} className="w-full" size="lg">
-                            {nextButtonText} {!isLastStep && <Icons.arrowRight className="ml-2" />}
+                            {nextButtonText} {!isLastStep && <Icons.arrowRight />}
                         </Button>
                     </div>
                     <TabsList className="grid w-full grid-cols-2 h-14 rounded-none">
@@ -164,12 +164,12 @@ export function ResumeBuilder() {
     );
     
   if (!mounted) {
-    return null; // or a loading spinner
+    return <div className="flex h-screen w-full items-center justify-center">Loading...</div>;
   }
 
   return (
     <div className="h-screen bg-background flex flex-col">
-        <header className="sticky top-0 z-10 w-full border-b bg-card flex items-center justify-between px-4 h-16">
+        <header className="sticky top-0 z-20 w-full border-b bg-card flex items-center justify-between px-4 h-16">
             <div className="flex items-center gap-2 flex-shrink-0">
                 <Logo />
                 <h1 className="text-xl font-bold font-headline hidden sm:block">ResumeFlow</h1>
@@ -186,13 +186,13 @@ export function ResumeBuilder() {
                                 <Menu className="h-6 w-6" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="left" className="w-full max-w-xs">
-                             <div className="flex flex-col h-full">
+                        <SheetContent side="top" className="w-full h-auto p-0">
+                             <div className="flex flex-col">
                                 <div className="flex items-center gap-2 p-4 border-b">
                                     <Logo />
                                     <h1 className="text-xl font-bold font-headline">ResumeFlow</h1>
                                 </div>
-                                <div className="flex-1 overflow-y-auto">
+                                <div className="overflow-y-auto">
                                    <Stepper />
                                 </div>
                             </div>

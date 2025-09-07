@@ -43,34 +43,34 @@ export function ProjectsForm() {
     return (
         <div className="space-y-8">
              <div className="text-center">
-                <h1 className="text-3xl font-bold">Your awesome <span className="text-blue-600">projects</span></h1>
-                <p className="text-gray-500 mt-2">Showcase your best work.</p>
+                <h1 className="text-3xl font-bold">Your awesome <span className="text-primary">projects</span></h1>
+                <p className="text-muted-foreground mt-2">Showcase your best work.</p>
              </div>
             <Accordion type="single" collapsible className="w-full" value={openAccordion} onValueChange={setOpenAccordion}>
                 {state.projects.map((proj, index) => (
                     <AccordionItem value={`item-${index}`} key={proj.id}>
-                        <div className="flex justify-between w-full items-center pr-2">
-                            <AccordionTrigger className="flex-1">
+                        <div className="flex justify-between w-full items-center">
+                            <AccordionTrigger className="flex-1 text-left">
                                 <span>{proj.name || `Project ${index + 1}`}</span>
                             </AccordionTrigger>
                             <Button variant="ghost" size="icon" onClick={() => handleRemoveProject(index)}>
-                                <Icons.trash className="h-4 w-4 text-red-500" />
+                                <Icons.trash className="h-4 w-4 text-destructive" />
                             </Button>
                         </div>
                         <AccordionContent>
-                            <div className="space-y-4 p-1">
+                            <div className="space-y-4 p-1 pt-0">
                                 <div>
                                     <Label htmlFor={`name-${index}`}>Project Name</Label>
                                     <Input id={`name-${index}`} name="name" value={proj.name} onChange={(e) => handleProjectChange(index, e)} />
                                 </div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <Label htmlFor={`endDate-${index}`}>End Date</Label>
-                                        <Input id={`endDate-${index}`} name="endDate" value={proj.endDate} onChange={(e) => handleProjectChange(index, e)} />
+                                        <Label htmlFor={`endDate-${index}`}>Date</Label>
+                                        <Input id={`endDate-${index}`} name="endDate" value={proj.endDate} onChange={(e) => handleProjectChange(index, e)} placeholder="e.g. May 2025"/>
                                     </div>
                                     <div>
                                         <Label htmlFor={`link-${index}`}>Link</Label>
-                                        <Input id={`link-${index}`} name="link" value={proj.link || ''} onChange={(e) => handleProjectChange(index, e)} />
+                                        <Input id={`link-${index}`} name="link" value={proj.link || ''} onChange={(e) => handleProjectChange(index, e)} placeholder="github.com/user/project" />
                                     </div>
                                 </div>
                                 <div>
@@ -78,10 +78,10 @@ export function ProjectsForm() {
                                     <Textarea id={`description-${index}`} name="description" value={proj.description} onChange={(e) => handleProjectChange(index, e)} />
                                 </div>
                                 <div>
-                                    <Label>Bullet Points</Label>
+                                    <Label>Key Features (Bullet Points)</Label>
                                      <div className="mt-2 space-y-2">
                                         {(proj.bulletPoints || []).map((point, i) => (
-                                            <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} />
+                                            <Input key={i} value={point} onChange={(e) => handleBulletPointChange(index, i, e.target.value)} placeholder={`Feature ${i + 1}`} />
                                         ))}
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@ export function ProjectsForm() {
                 ))}
             </Accordion>
             <Button onClick={handleAddProject} variant="outline" className="w-full">
-                <Icons.add className="mr-2" /> Add Project
+                <Icons.add /> Add Project
             </Button>
         </div>
     )

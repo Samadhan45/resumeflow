@@ -34,11 +34,11 @@ export function SummaryForm() {
     return (
         <div className="space-y-8">
             <div className="text-center">
-                <h1 className="text-3xl font-bold">Your professional <span className="text-blue-600">summary</span></h1>
-                <p className="text-gray-500 mt-2">This is your chance to shine. Make it count!</p>
+                <h1 className="text-3xl font-bold">Your professional <span className="text-primary">summary</span></h1>
+                <p className="text-muted-foreground mt-2">This is your chance to shine. Make it count!</p>
             </div>
 
-            <div>
+            <div className="space-y-2">
                 <Label htmlFor="summary">Professional Summary</Label>
                 <Textarea
                     id="summary"
@@ -50,7 +50,7 @@ export function SummaryForm() {
             </div>
 
             <Button onClick={handleGenerateSummary} disabled={generating} className="w-full">
-                {generating ? 'Generating...' : <><Icons.sparkles className="mr-2" />Autofill with AI</>}
+                {generating ? 'Generating...' : <><Icons.sparkles />Autofill with AI</>}
             </Button>
         </div>
     );
