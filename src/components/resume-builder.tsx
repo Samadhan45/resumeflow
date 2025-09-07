@@ -11,6 +11,8 @@ import { Logo } from './logo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ThemeToggle } from './theme-toggle';
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+import { Menu } from 'lucide-react';
 
 
 const steps = ["DESIGN", "CONTACT", "EXPERIENCE", "PROJECTS", "EDUCATION", "SKILLS", "CERTIFICATIONS", "ACHIEVEMENTS", "SUMMARY", "FINISH"];
@@ -29,20 +31,20 @@ function Stepper() {
           const isCompleted = step > stepNumber || (step === steps.length + 1); 
           return (
             <React.Fragment key={name}>
-              <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer disabled:cursor-not-allowed" disabled={step > steps.length}>
+              <button onClick={() => setStep(stepNumber)} className="flex flex-col items-center text-center cursor-pointer disabled:cursor-not-allowed group" disabled={step > steps.length}>
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center border-2 ${
-                    isActive || isCompleted ? 'border-blue-500' : 'border-gray-300'
-                  } ${isCompleted ? 'bg-blue-500' : 'bg-white'}`}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-colors duration-300 ${
+                    isActive || isCompleted ? 'border-blue-500' : 'border-gray-300 group-hover:border-blue-300'
+                  } ${isCompleted ? 'bg-blue-500' : 'bg-background'}`}
                 >
                   {isCompleted && <Icons.check className="w-4 h-4 text-white" />}
                 </div>
-                <p className={`mt-2 text-xs font-semibold ${isMobile ? 'w-16' : ''} ${isActive || isCompleted ? 'text-blue-500' : 'text-gray-500'}`}>
+                <p className={`mt-2 text-xs font-semibold transition-colors duration-300 ${isMobile ? 'w-16' : ''} ${isActive || isCompleted ? 'text-blue-500' : 'text-gray-500 group-hover:text-blue-500'}`}>
                   {name}
                 </p>
               </button>
               {index < steps.length - 1 && (
-                <div className={`flex-1 h-0.5 ${isMobile ? 'min-w-[20px]' : 'mx-2'} ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
+                <div className={`flex-1 h-0.5 transition-colors duration-300 ${isMobile ? 'min-w-[20px]' : 'mx-2'} ${isCompleted ? 'bg-blue-500' : 'bg-gray-300'}`} />
               )}
             </React.Fragment>
           );
@@ -167,17 +169,37 @@ export function ResumeBuilder() {
 
   return (
     <div className="h-screen bg-background flex flex-col">
-       <header className="sticky top-0 z-10 w-full border-b bg-card flex items-center justify-between px-4">
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <Logo />
-            <h1 className="text-xl font-bold font-headline hidden sm:block">ResumeFlow</h1>
-          </div>
-          <div className="flex-1 min-w-0 px-4">
-            <Stepper />
-          </div>
-          <div className="flex-shrink-0">
-            <ThemeToggle />
-          </div>
+        <header className="sticky top-0 z-10 w-full border-b bg-card flex items-center justify-between px-4 h-16">
+            <div className="flex items-center gap-2 flex-shrink-0">
+                <Logo />
+                <h1 className="text-xl font-bold font-headline hidden sm:block">ResumeFlow</h1>
+            </div>
+            <div className="flex-1 min-w-0 px-4 hidden md:flex justify-center">
+                <Stepper />
+            </div>
+            <div className="flex items-center gap-2">
+                 <ThemeToggle />
+                <div className="md:hidden">
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                                <Menu className="h-6 w-6" />
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent side="left" className="w-full max-w-xs">
+                             <div className="flex flex-col h-full">
+                                <div className="flex items-center gap-2 p-4 border-b">
+                                    <Logo />
+                                    <h1 className="text-xl font-bold font-headline">ResumeFlow</h1>
+                                </div>
+                                <div className="flex-1 overflow-y-auto">
+                                   <Stepper />
+                                </div>
+                            </div>
+                        </SheetContent>
+                    </Sheet>
+                </div>
+            </div>
         </header>
         <div className="flex-1 overflow-hidden">
             {isMobile ? mobileLayout : desktopLayout}
@@ -185,5 +207,3 @@ export function ResumeBuilder() {
     </div>
   );
 }
-
-    
