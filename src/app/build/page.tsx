@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Logo } from '@/components/logo';
 
-const ResumeBuilder = dynamic(() => import('@/components/resume-builder').then(mod => mod.ResumeBuilder), {
+const ResumeBuilder = dynamic(() => import('@/components/resume-builder.tsx').then(mod => mod.ResumeBuilder), {
   ssr: false, 
   loading: () => (
     <div className="h-screen bg-background flex flex-col">
