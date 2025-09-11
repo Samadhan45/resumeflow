@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Icons } from '../icons';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { useResume } from '@/hooks/use-resume';
 import { useToast } from '@/hooks/use-toast';
 import type { Resume } from '@/lib/types';
@@ -25,10 +23,13 @@ export function FinishForm() {
         window.print();
     }
 
-    const handleDownloadPdf = () => {
+    const handleDownloadPdf = async () => {
         setIsDownloading(true);
         const input = document.getElementById('resume-preview');
         if (input) {
+            const { default: jsPDF } = await import('jspdf');
+            const { default: html2canvas } = await import('html2canvas');
+            
             const originalScale = input.style.transform;
             input.style.transform = 'scale(1)';
 
@@ -73,6 +74,11 @@ export function FinishForm() {
                 console.error("Error generating PDF:", err);
                 input.style.transform = originalScale;
                 setIsDownloading(false);
+                toast({
+                  title: 'Download Failed',
+                  description: 'There was an error generating the PDF.',
+                  variant: 'destructive'
+                });
             });
         } else {
             setIsDownloading(false);
@@ -184,5 +190,3 @@ export function FinishForm() {
         </div>
     );
 }
-
-    
