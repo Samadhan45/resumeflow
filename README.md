@@ -85,6 +85,7 @@ Feel free to connect with me for collaboration or feedback!
 ---
 
 > Built with ❤️ by **Samadhan Kadam**
+> Last Deployment Trigger: 2026-01-15 (Security Fixes Included)
 
 ```
 
