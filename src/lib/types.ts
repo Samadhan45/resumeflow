@@ -24,13 +24,13 @@ export interface Experience {
 }
 
 export interface Project {
-    id: string;
-    name: string;
-    endDate: string;
-    link?: string;
-    description: string;
-    bulletPoints: string[];
-    techStack: string[];
+  id: string;
+  name: string;
+  endDate: string;
+  link?: string;
+  description: string;
+  bulletPoints: string[];
+  techStack: string[];
 }
 
 export interface Education {
@@ -46,28 +46,28 @@ export interface Skill {
 }
 
 export interface Certification {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 
 export interface Achievement {
-    id: string;
-    name: string;
+  id: string;
+  name: string;
 }
 
 interface FontStyle {
-    fontSize: number;
-    color: string;
+  fontSize: number;
+  color: string;
 }
 
 export interface Theme {
-    fontFamily: string;
-    lineHeight: number;
-    heading: FontStyle;
-    subheading: FontStyle;
-    sectionHeading: FontStyle;
-    body: FontStyle;
-    link: FontStyle;
+  fontFamily: string;
+  lineHeight: number;
+  heading: FontStyle;
+  subheading: FontStyle;
+  sectionHeading: FontStyle;
+  body: FontStyle;
+  link: FontStyle;
 }
 
 export interface Resume {
@@ -81,6 +81,7 @@ export interface Resume {
   achievements: Achievement[];
   newSkill: string;
   theme: Theme;
+  template: string;
 }
 
 export type Action =
@@ -110,4 +111,35 @@ export type Action =
   | { type: 'ADD_ACHIEVEMENT' }
   | { type: 'UPDATE_ACHIEVEMENT'; payload: { index: number; key: string; value: string } }
   | { type: 'REMOVE_ACHIEVEMENT'; payload: number }
-  | { type: 'UPDATE_THEME'; payload: Partial<Theme> };
+  | { type: 'UPDATE_THEME'; payload: Partial<Theme> }
+  | { type: 'UPDATE_TEMPLATE'; payload: string }
+  | { type: 'UPDATE_JOB_DESCRIPTION'; payload: string }
+  | { type: 'ADD_AI_SUGGESTION'; payload: AISuggestion }
+  | { type: 'REMOVE_AI_SUGGESTION'; payload: string }
+  | { type: 'APPLY_AI_SUGGESTION'; payload: { id: string, section: string, key?: string, index?: number, value: any } };
+
+export interface AISuggestion {
+  id: string;
+  section: string; // e.g., 'summary', 'experience', 'general'
+  field?: string; // e.g., 'responsibilities'
+  index?: number; // for array items
+  originalValue?: any;
+  suggestedValue: any;
+  reason: string;
+}
+
+export interface Resume {
+  personalInfo: PersonalInfo;
+  summary: string;
+  experience: Experience[];
+  projects: Project[];
+  education: Education[];
+  skills: Skill[];
+  certifications: Certification[];
+  achievements: Achievement[];
+  newSkill: string;
+  theme: Theme;
+  template: string;
+  jobDescription?: string;
+  aiSuggestions: AISuggestion[];
+}

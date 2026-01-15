@@ -8,8 +8,8 @@
  * - GenerateBulletPointsOutput - The return type for the generateBulletPoints function.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
 
 const GenerateBulletPointsInputSchema = z.object({
   jobTitle: z.string().describe('The job title of the work experience.'),
@@ -28,8 +28,8 @@ export async function generateBulletPoints(input: GenerateBulletPointsInput): Pr
 
 const prompt = ai.definePrompt({
   name: 'generateBulletPointsPrompt',
-  input: {schema: GenerateBulletPointsInputSchema},
-  output: {schema: GenerateBulletPointsOutputSchema},
+  input: { schema: GenerateBulletPointsInputSchema },
+  output: { schema: GenerateBulletPointsOutputSchema },
   prompt: `You are an expert resume writer. Generate 3-5 concise bullet points based on the job title and responsibilities provided.
 
 Job Title: {{{jobTitle}}}
@@ -45,7 +45,14 @@ const generateBulletPointsFlow = ai.defineFlow(
     outputSchema: GenerateBulletPointsOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    console.log('Generating bullet points for:', input);
+    try {
+      const { output } = await prompt(input);
+      console.log('AI Response:', output);
+      return output || { bulletPoints: [] };
+    } catch (e) {
+      console.error('Genkit prompt error:', e);
+      return { bulletPoints: [] };
+    }
   }
 );

@@ -5,14 +5,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
-import { Textarea } from '../ui/textarea';
+import { AutoTextarea } from '@/components/ui/auto-textarea';
 import { generateBulletPoints } from '@/ai/flows/generate-bullet-points';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from "@/components/ui/accordion"
+import { toast } from 'sonner';
 
 export function EmploymentHistoryForm() {
     const { state, dispatch } = useResume();
@@ -38,14 +39,28 @@ export function EmploymentHistoryForm() {
     const handleGenerateBulletPoints = async (index: number) => {
         setGenerating(index);
         const exp = state.experience[index];
+
+        if (!exp.jobTitle) {
+            toast.error("Please enter a Job Title first.");
+            setGenerating(null);
+            return;
+        }
+
         try {
-            const { bulletPoints } = await generateBulletPoints({
+            const result = await generateBulletPoints({
                 jobTitle: exp.jobTitle,
-                responsibilities: exp.responsibilities,
+                responsibilities: exp.responsibilities || '',
             });
-            dispatch({ type: 'UPDATE_EXPERIENCE_BULLETS', payload: { index, bullets: bulletPoints } });
+
+            if (result && result.bulletPoints && result.bulletPoints.length > 0) {
+                dispatch({ type: 'UPDATE_EXPERIENCE_BULLETS', payload: { index, bullets: result.bulletPoints } });
+                toast.success("Bullet points generated successfully!");
+            } else {
+                toast.error("AI could not generate suggestions. Please try again or add more details.");
+            }
         } catch (error) {
             console.error('Failed to generate bullet points:', error);
+            toast.error("Something went wrong with the AI service.");
         } finally {
             setGenerating(null);
         }
@@ -56,7 +71,7 @@ export function EmploymentHistoryForm() {
         bullets[bulletIndex] = value;
         dispatch({ type: 'UPDATE_EXPERIENCE_BULLETS', payload: { index: expIndex, bullets } });
     }
-    
+
     const handleTechStackChange = (expIndex: number, value: string) => {
         const techStack = value.split(',').map(s => s.trim());
         dispatch({ type: 'UPDATE_EXPERIENCE_TECH_STACK', payload: { index: expIndex, techStack } });
@@ -64,14 +79,14 @@ export function EmploymentHistoryForm() {
 
     return (
         <div className="space-y-8">
-             <div className="text-center">
+            <div className="text-center">
                 <h1 className="text-3xl font-bold">Your work <span className="text-primary">experience</span></h1>
                 <p className="text-muted-foreground mt-2">What has been your work experience so far?</p>
-             </div>
+            </div>
             <Accordion type="single" collapsible className="w-full" value={openAccordion} onValueChange={setOpenAccordion}>
                 {state.experience.map((exp, index) => (
                     <AccordionItem value={`item-${index}`} key={exp.id}>
-                         <div className="flex justify-between w-full items-center">
+                        <div className="flex justify-between w-full items-center">
                             <AccordionTrigger className="flex-1 text-left">
                                 <span>{exp.jobTitle || `Experience ${index + 1}`}</span>
                             </AccordionTrigger>
@@ -95,7 +110,7 @@ export function EmploymentHistoryForm() {
                                     <Label htmlFor={`location-${index}`}>Location</Label>
                                     <Input id={`location-${index}`} name="location" value={exp.location} onChange={(e) => handleExperienceChange(index, e)} />
                                 </div>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <Label htmlFor={`startDate-${index}`}>Start Date</Label>
                                         <Input id={`startDate-${index}`} name="startDate" value={exp.startDate} onChange={(e) => handleExperienceChange(index, e)} />
@@ -107,7 +122,7 @@ export function EmploymentHistoryForm() {
                                 </div>
                                 <div>
                                     <Label htmlFor={`responsibilities-${index}`}>Description</Label>
-                                    <Textarea id={`responsibilities-${index}`} name="responsibilities" value={exp.responsibilities} onChange={(e) => handleExperienceChange(index, e)} />
+                                    <AutoTextarea id={`responsibilities-${index}`} name="responsibilities" value={exp.responsibilities} onChange={(e) => handleExperienceChange(index, e)} />
                                 </div>
                                 <div>
                                     <div className="flex items-center justify-between mb-2">

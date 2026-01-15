@@ -4,6 +4,8 @@ import { useResume } from '@/hooks/use-resume';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
+import { AutoTextarea } from '@/components/ui/auto-textarea';
+import { Icons } from '@/components/icons';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import type { Theme } from '@/lib/types';
@@ -40,33 +42,33 @@ const predefinedThemes: { name: string; theme: Partial<Theme> }[] = [
             lineHeight: 1.6,
             sectionHeading: { fontSize: 14, color: '#000000' },
             heading: { fontSize: 30, color: '#000000' },
-            subheading: { fontSize: 14, color: '#333333'},
-            body: { fontSize: 12, color: '#333333'},
-            link: { fontSize: 12, color: '#000000'},
+            subheading: { fontSize: 14, color: '#333333' },
+            body: { fontSize: 12, color: '#333333' },
+            link: { fontSize: 12, color: '#000000' },
         }
     },
-     {
+    {
         name: 'Modern',
         theme: {
             fontFamily: 'Roboto',
             lineHeight: 1.5,
             sectionHeading: { fontSize: 14, color: '#1a202c' },
             heading: { fontSize: 34, color: '#2563eb' },
-            subheading: { fontSize: 16, color: '#2d3748'},
-            body: { fontSize: 12, color: '#4a5568'},
-            link: { fontSize: 12, color: '#2563eb'},
+            subheading: { fontSize: 16, color: '#2d3748' },
+            body: { fontSize: 12, color: '#4a5568' },
+            link: { fontSize: 12, color: '#2563eb' },
         }
     },
-     {
+    {
         name: 'Creative',
         theme: {
             fontFamily: 'Montserrat',
             lineHeight: 1.7,
             sectionHeading: { fontSize: 15, color: '#9d4edd' },
             heading: { fontSize: 36, color: '#e85d04' },
-            subheading: { fontSize: 16, color: '#2d3748'},
-            body: { fontSize: 13, color: '#4a5568'},
-            link: { fontSize: 12, color: '#e85d04'},
+            subheading: { fontSize: 16, color: '#2d3748' },
+            body: { fontSize: 13, color: '#4a5568' },
+            link: { fontSize: 12, color: '#e85d04' },
         }
     }
 ]
@@ -126,14 +128,14 @@ function FontStyleControls({ title, type }: FontStyleControlsProps) {
 export function DesignForm() {
     const { state, dispatch } = useResume();
     const { theme } = state;
-    
+
     const handleGlobalThemeChange = (key: string, value: any) => {
         dispatch({
             type: 'UPDATE_THEME',
             payload: { [key]: value },
         });
     };
-    
+
     const handleThemeSelect = (selectedTheme: Partial<Theme>) => {
         dispatch({ type: 'UPDATE_THEME', payload: selectedTheme });
     }
@@ -144,29 +146,54 @@ export function DesignForm() {
                 <h1 className="text-3xl font-bold">Customize your <span className="text-primary">resume design</span></h1>
                 <p className="text-muted-foreground mt-2">Pick a template or customize your own design.</p>
             </div>
-            
+
+            {/* Job Context - Tailor for Job */}
+            <div className="bg-muted/30 p-4 rounded-lg border border-border/50">
+                <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                        <div className="p-1.5 bg-primary/10 rounded text-primary">
+                            <Icons.sparkles className="w-4 h-4" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-sm">Tailor for specific job</h3>
+                            <p className="text-xs text-muted-foreground">Paste the job description here for better AI suggestions.</p>
+                        </div>
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="job-description">Job Description</Label>
+                        <AutoTextarea
+                            id="job-description"
+                            className="min-h-[100px] text-sm"
+                            placeholder="Paste the job description (JD) here..."
+                            value={state.jobDescription || ''}
+                            onChange={(e) => dispatch({ type: 'UPDATE_JOB_DESCRIPTION', payload: e.target.value })}
+                        />
+                    </div>
+                </div>
+            </div>
+
             <div className="space-y-4">
-                 <h3 className="text-lg font-semibold">Template Gallery</h3>
-                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {predefinedThemes.map(({name, theme: themeOption}) => (
+                <h3 className="text-lg font-semibold">Template Gallery</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {predefinedThemes.map(({ name, theme: themeOption }) => (
                         <div key={name} className="space-y-2" onClick={() => handleThemeSelect(themeOption)}>
-                             <Card className={cn("overflow-hidden cursor-pointer hover:shadow-lg hover:border-primary transition-all", theme.fontFamily === themeOption.fontFamily && theme.heading?.color === themeOption.heading?.color ? "border-primary border-2" : "")}>
+                            <Card className={cn("overflow-hidden cursor-pointer hover:shadow-lg hover:border-primary transition-all", theme.fontFamily === themeOption.fontFamily && theme.heading?.color === themeOption.heading?.color ? "border-primary border-2" : "")}>
                                 <CardContent className="p-2">
                                     <div className="aspect-[3/4] bg-white flex flex-col items-center p-2">
-                                        <div className='w-full h-4 rounded-full' style={{backgroundColor: themeOption.heading?.color}} />
-                                         <div className='w-3/4 h-2 rounded-full mt-2' style={{backgroundColor: themeOption.subheading?.color}} />
-                                         <div className='w-full h-2 rounded-full mt-4' style={{backgroundColor: themeOption.sectionHeading?.color}} />
-                                         <div className='w-full h-1 rounded-full mt-2' style={{backgroundColor: themeOption.body?.color}} />
-                                         <div className='w-full h-1 rounded-full mt-1' style={{backgroundColor: themeOption.body?.color}} />
-                                         <div className='w-2/3 h-1 rounded-full mt-1' style={{backgroundColor: themeOption.body?.color}} />
+                                        <div className='w-full h-4 rounded-full' style={{ backgroundColor: themeOption.heading?.color }} />
+                                        <div className='w-3/4 h-2 rounded-full mt-2' style={{ backgroundColor: themeOption.subheading?.color }} />
+                                        <div className='w-full h-2 rounded-full mt-4' style={{ backgroundColor: themeOption.sectionHeading?.color }} />
+                                        <div className='w-full h-1 rounded-full mt-2' style={{ backgroundColor: themeOption.body?.color }} />
+                                        <div className='w-full h-1 rounded-full mt-1' style={{ backgroundColor: themeOption.body?.color }} />
+                                        <div className='w-2/3 h-1 rounded-full mt-1' style={{ backgroundColor: themeOption.body?.color }} />
 
                                     </div>
                                 </CardContent>
                             </Card>
-                             <p className="text-center text-sm font-medium">{name}</p>
+                            <p className="text-center text-sm font-medium">{name}</p>
                         </div>
                     ))}
-                 </div>
+                </div>
             </div>
 
             <Accordion type="single" collapsible className="w-full">
@@ -188,7 +215,7 @@ export function DesignForm() {
                                     </SelectTrigger>
                                     <SelectContent>
                                         {fontFamilies.map(font => (
-                                            <SelectItem key={font} value={font} style={{fontFamily: font}}>
+                                            <SelectItem key={font} value={font} style={{ fontFamily: font }}>
                                                 {font}
                                             </SelectItem>
                                         ))}

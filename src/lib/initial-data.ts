@@ -37,49 +37,49 @@ export const initialData: Resume = {
         'Integrated Open AI-powered search and summary generator, boosting retrieval speed by 70%.',
         'Enabled PDF/JPEG exports, notes, and real-time updates, supporting mobile, tablet, and desktop users.',
       ],
-       techStack: ['React Hooks', 'JavaScript', 'CSS', 'Open AI', 'Firebase'],
+      techStack: ['React Hooks', 'JavaScript', 'CSS', 'Open AI', 'Firebase'],
     },
     {
-        id: '3',
-        name: 'AI Portfolio WebApp',
-        endDate: 'Jul 2024',
-        link: '#',
-        description: 'Built a high-performance portfolio with dynamic routing and responsive UI using ShadCN and Tailwind CSS.',
-        bulletPoints: [
-            'Integrated Gemini AI (Genkit) for generating smart skill descriptions with tone customisation.',
-            'Showcased 4 projects, 6 certifications, and enabled real-time messaging via the Resend email service.'
-        ],
-        techStack: ['TypeScript', 'Next.js', 'Resend', 'Gemini AI'],
+      id: '3',
+      name: 'AI Portfolio WebApp',
+      endDate: 'Jul 2024',
+      link: '#',
+      description: 'Built a high-performance portfolio with dynamic routing and responsive UI using ShadCN and Tailwind CSS.',
+      bulletPoints: [
+        'Integrated Gemini AI (Genkit) for generating smart skill descriptions with tone customisation.',
+        'Showcased 4 projects, 6 certifications, and enabled real-time messaging via the Resend email service.'
+      ],
+      techStack: ['TypeScript', 'Next.js', 'Resend', 'Gemini AI'],
     },
   ],
   experience: [
     {
-        id: '1',
-        jobTitle: 'Web Development Intern',
-        company: 'Elite Software',
-        location: 'Pune, India',
-        startDate: 'Oct 2024',
-        endDate: 'Nov 2024',
-        responsibilities: 'Developed secure, full-stack web applications using Django. Focusing on the admin dashboard and user role management.',
-        bulletPoints: [
-            'Authentication: Learned to implement user login and security using Django\'s built-in features.',
-            'Learned end-to-end project deployment workflows, including environment setup, 2+ domain integrations.'
-        ],
-        techStack: ['Django', 'Python', 'cPanel'],
+      id: '1',
+      jobTitle: 'Web Development Intern',
+      company: 'Elite Software',
+      location: 'Pune, India',
+      startDate: 'Oct 2024',
+      endDate: 'Nov 2024',
+      responsibilities: 'Developed secure, full-stack web applications using Django. Focusing on the admin dashboard and user role management.',
+      bulletPoints: [
+        'Authentication: Learned to implement user login and security using Django\'s built-in features.',
+        'Learned end-to-end project deployment workflows, including environment setup, 2+ domain integrations.'
+      ],
+      techStack: ['Django', 'Python', 'cPanel'],
     },
     {
-        id: '2',
-        jobTitle: 'Web Development Intern',
-        company: 'Social Digital Wings',
-        location: 'Remote',
-        startDate: 'Apr 2021',
-        endDate: 'May 2021',
-        responsibilities: 'Led a team of 4 students to build a fully responsive React.js dashboard for internal project tracking and analytics.',
-        bulletPoints: [
-            'Designed and developed 10+ reusable components using HTML, CSS, JavaScript, and React.js.',
-            'Enhanced UI consistency, contributing to 20% faster load times and 100% mobile responsiveness.'
-        ],
-        techStack: ['React.js', 'HTML', 'CSS', 'JavaScript'],
+      id: '2',
+      jobTitle: 'Web Development Intern',
+      company: 'Social Digital Wings',
+      location: 'Remote',
+      startDate: 'Apr 2021',
+      endDate: 'May 2021',
+      responsibilities: 'Led a team of 4 students to build a fully responsive React.js dashboard for internal project tracking and analytics.',
+      bulletPoints: [
+        'Designed and developed 10+ reusable components using HTML, CSS, JavaScript, and React.js.',
+        'Enhanced UI consistency, contributing to 20% faster load times and 100% mobile responsiveness.'
+      ],
+      techStack: ['React.js', 'HTML', 'CSS', 'JavaScript'],
     }
   ],
   education: [
@@ -100,41 +100,44 @@ export const initialData: Resume = {
     { id: '7', name: 'Tech Stacks: Next.js, Tailwind CSS, Clerk, Gemini AI, PostgreSQL, React Hooks, JavaScript, CSS, Open AI, Firebase, TypeScript, Resend, Django, Python, cPanel' },
   ],
   certifications: [
-      { id: '1', name: 'Java: Core Java & Advanced Java – QSpiders' },
-      { id: '2', name: 'C++: C++ Introduction & Advanced C++ – Simplilearn' },
-      { id: '3', name: 'Full Stack: Java Full Stack Development Course – QSpiders' },
-      { id: '4', name: 'SQL: Oracle SQL – QSpiders' },
-      { id: '5', name: 'IT Support: Google IT Support Professional Certificate – Coursera' },
-      { id: '6', name: 'ChatGPT: ChatGPT Advanced Course – Simplilearn' },
+    { id: '1', name: 'Java: Core Java & Advanced Java – QSpiders' },
+    { id: '2', name: 'C++: C++ Introduction & Advanced C++ – Simplilearn' },
+    { id: '3', name: 'Full Stack: Java Full Stack Development Course – QSpiders' },
+    { id: '4', name: 'SQL: Oracle SQL – QSpiders' },
+    { id: '5', name: 'IT Support: Google IT Support Professional Certificate – Coursera' },
+    { id: '6', name: 'ChatGPT: ChatGPT Advanced Course – Simplilearn' },
   ],
   achievements: [
-      { id: '1', name: 'TCS NQT: Qualified National Qualifier Test – Tata Consultancy Services – 2025' },
-      { id: '2', name: 'Research paper: Published a research paper as part of a final-year project.' },
-      { id: '3', name: 'Project Management: Assigned tasks to 3 teammates and tracked weekly progress via GitHub.' },
+    { id: '1', name: 'TCS NQT: Qualified National Qualifier Test – Tata Consultancy Services – 2025' },
+    { id: '2', name: 'Research paper: Published a research paper as part of a final-year project.' },
+    { id: '3', name: 'Project Management: Assigned tasks to 3 teammates and tracked weekly progress via GitHub.' },
   ],
   newSkill: '',
   theme: {
     fontFamily: 'Inter',
     lineHeight: 1.5,
     heading: {
-        fontSize: 32,
-        color: '#000000',
+      fontSize: 32,
+      color: '#000000',
     },
     subheading: {
-        fontSize: 16,
-        color: '#4a5568',
+      fontSize: 16,
+      color: '#4a5568',
     },
     sectionHeading: {
-        fontSize: 14,
-        color: '#2d3748',
+      fontSize: 14,
+      color: '#2d3748',
     },
     body: {
-        fontSize: 12,
-        color: '#2d3748',
+      fontSize: 12,
+      color: '#2d3748',
     },
     link: {
-        fontSize: 12,
-        color: '#2b6cb0',
+      fontSize: 12,
+      color: '#2b6cb0',
     }
-  }
+  },
+  template: 'modern',
+  jobDescription: '',
+  aiSuggestions: []
 };
